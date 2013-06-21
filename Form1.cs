@@ -12,6 +12,7 @@ namespace Picu
 {
     public partial class Form1 : Form
     {
+        private const string version = "2.0.2";
         private NotifyIcon icon;
         private Timer check;
         private string last_screen;
@@ -44,6 +45,8 @@ namespace Picu
             thread_task = new Stack<string>();
             upload_list = new ListUp();
             thread_grid_task = new Stack<int>();
+
+            this.Text = "Picu Screenshot - " + version;
         }
 
         private void Form1_Load(object sender, EventArgs e)
