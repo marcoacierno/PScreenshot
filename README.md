@@ -1,11 +1,21 @@
 PScreenshot - Easy screenshots v2.0.1
 ===========
-<br />
-L'Applicazione serve per eseguire uno screen del computer in maniera rapida senza dover premere prima stamp e poi andare su paint e salvare.<br />
-Con l'ultimo aggiornamento, attivando "Upload automatico" ( http://picu.site11.com/images/a6a8fd020b2aa58bf792baba48b38cd86d06a967.png ) lo screen appena effettuato sarà caricato sul sito Picu!
-<br />
-Con l'ultima versione (v2.0.1) è possibile caricare direttamente un'immagine.
-http://picu.site11.com/images/16d3b8a5f2f26e6eecfba1052c2cd5b4b1e61518.png <br />
+Lo scopo dell'applicazione è permettere agli utenti di creare i screen dei propri desktop in modo immediato e vederli caricati in pochi secondi. <br />
+Usando il menù a sinistra è possibile personalizzare l'applicazione del formato delle immagini alla possibilità di caricare un'immagine a scelta.
+
+Changelog
+===========
+v2.0.2
+* Risolto il bug che non faceva riaprire l'upload list dopo la sua chiusura
+* Aggiunta la versione nel titolo del form
+
+v2.0.1
+* Aggiunta la possibilità di caricare un'immagine (o più immagini) già esistenti
+
+v2.0
+* Migliorata estetica
+* Aggiunto l'upload automatico dell'immagine appena caricata
+* Migliorata la stabilità
 
 Screenshots demo
 ===========
