@@ -7,14 +7,15 @@ using System.Drawing.Imaging;
 using System.Net;
 using System.Text;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Picu
 {
     public partial class Form1 : Form
     {
-        private const string version = "2.0.2";
+        private const string version = "2.1.0";
         private NotifyIcon icon;
-        private Timer check;
+        private System.Windows.Forms.Timer check;
         private string last_screen;
         private const int info_time = 500;                                  // ms
         private ImageFormat format;
@@ -25,6 +26,9 @@ namespace Picu
         private Stack<string> thread_task;
         private Stack<int> thread_grid_task;
         private ListUp upload_list;
+        private bool in_upload;
+        // fuck :V const not work :|
+       // private readonly WebClient wb = new WebClient();
 
         /**
          * grid default text
@@ -41,6 +45,7 @@ namespace Picu
 
             cattura_salva = true;
             instant_upload = true;
+            in_upload = false;
 
             thread_task = new Stack<string>();
             upload_list = new ListUp();
@@ -66,7 +71,7 @@ namespace Picu
             
             icon.Visible = true;
 
-            check = new Timer();
+            check = new System.Windows.Forms.Timer();
             check.Interval = 1;
             check.Tick += check_Tick;
 
@@ -81,6 +86,7 @@ namespace Picu
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);
+
         }
 
         void icon_MouseClick(object sender, MouseEventArgs e)
@@ -301,12 +307,75 @@ namespace Picu
             // se il thread non è già attivo
             // lo starta
 
+            if (!in_upload)
+            {
+                RunUploader();
+            }
+
+            /*
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
-            }
+            }*/
         }
 
+        private void RunUploader()
+        {
+            if (thread_task.Count == 0)
+            {
+                in_upload = false;
+                return;
+            }
+            
+            in_upload = true;
+
+            string file = thread_task.Pop();
+            int id = thread_grid_task.Pop();
+
+            upload_list.dataGridView1.Rows[id].Cells[1].Value = "In upload.. attendere";
+
+            WebClient wb = new WebClient();
+
+            wb.UploadFileCompleted   += (sender, e) => wb_UploadedEnded(sender, e, id);
+            wb.UploadProgressChanged += (sender, e) => wb_UpdateProgress(sender, e, id);
+
+            new Thread(
+                () =>
+                {
+                    wb.UploadFileAsync(new Uri(url_picu), file);
+                }
+            ).Start();
+
+        }
+
+        void wb_UploadedEnded(object sender, UploadFileCompletedEventArgs e, int id)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("La richiesta è stata cancellata (?)");
+                return;
+            }
+
+            BeginInvoke(new MethodInvoker(() =>
+                {
+                    upload_list.dataGridView1.Rows[id].Cells[2].Value = Encoding.ASCII.GetString(e.Result);
+                    upload_list.dataGridView1.Rows[id].Cells[1].Value = "No, caricato.";
+                }
+            ));
+
+            RunUploader();
+        }
+
+        void wb_UpdateProgress(object sender, UploadProgressChangedEventArgs e, int id)
+        {
+            BeginInvoke(new MethodInvoker(() =>
+                {
+                    upload_list.dataGridView1.Rows[id].Cells[1].Value = "In Upload (" + e.ProgressPercentage + "%)";
+                }
+            ));
+        }
+
+        /*
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             while (thread_task.Count > 0)
@@ -324,6 +393,7 @@ namespace Picu
                 upload_list.dataGridView1.Rows[id].Cells[1].Value = "No, caricato.";
             }
         }
+        */
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -337,5 +407,6 @@ namespace Picu
         {
             openFileDialog1.ShowDialog();
         }
+
     }
 }

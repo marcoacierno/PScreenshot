@@ -27,10 +27,6 @@
                     System.IO.File.Delete("tmp." + estensione);
                 }
 
-                if (backgroundWorker1.IsBusy)
-                {
-                    backgroundWorker1.Dispose();
-                }
             }
 
             base.Dispose(disposing);
@@ -53,6 +49,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.caricaUnimmagineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,9 +57,7 @@
             this.bmpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catturaESalvaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uploadAutomaticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.caricaUnimmagineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +135,13 @@
             this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             // 
+            // caricaUnimmagineToolStripMenuItem
+            // 
+            this.caricaUnimmagineToolStripMenuItem.Name = "caricaUnimmagineToolStripMenuItem";
+            this.caricaUnimmagineToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.caricaUnimmagineToolStripMenuItem.Text = "Carica un\'immagine";
+            this.caricaUnimmagineToolStripMenuItem.Click += new System.EventHandler(this.caricaUnimmagineToolStripMenuItem_Click);
+            // 
             // formatoToolStripMenuItem
             // 
             this.formatoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -195,22 +197,11 @@
             this.uploadAutomaticoToolStripMenuItem.Text = "Upload automatico";
             this.uploadAutomaticoToolStripMenuItem.Click += new System.EventHandler(this.uploadAutomaticoToolStripMenuItem_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
-            // caricaUnimmagineToolStripMenuItem
-            // 
-            this.caricaUnimmagineToolStripMenuItem.Name = "caricaUnimmagineToolStripMenuItem";
-            this.caricaUnimmagineToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.caricaUnimmagineToolStripMenuItem.Text = "Carica un\'immagine";
-            this.caricaUnimmagineToolStripMenuItem.Click += new System.EventHandler(this.caricaUnimmagineToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -249,7 +240,6 @@
         private System.Windows.Forms.ToolStripMenuItem bmpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catturaESalvaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uploadAutomaticoToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem caricaUnimmagineToolStripMenuItem;
     }

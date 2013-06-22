@@ -5,6 +5,9 @@ Usando il menù a sinistra è possibile personalizzare l'applicazione del format
 
 Changelog
 ===========
+v2.1.0
+* Aggiunta la percentuale di upload affianco alla scritta "In upload"
+
 v2.0.2
 * Risolto il bug che non faceva riaprire l'upload list dopo la sua chiusura
 * Aggiunta la versione nel titolo del form
