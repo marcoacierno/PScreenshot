@@ -23,8 +23,8 @@ namespace Picu
         private bool cattura_salva;
         private bool instant_upload;                                        // uploadAutomaticoToolStripMenuItem
         private const string url_picu = @"http://picu.site11.com/share_app.php";
-        private Stack<string> thread_task;
-        private Stack<int> thread_grid_task;
+        private Queue<string> thread_task;
+        private Queue<int> thread_grid_task;
         private ListUp upload_list;
         private bool in_upload;
         // fuck :V const not work :|
@@ -47,9 +47,9 @@ namespace Picu
             instant_upload = true;
             in_upload = false;
 
-            thread_task = new Stack<string>();
+            thread_task = new Queue<string>();
             upload_list = new ListUp();
-            thread_grid_task = new Stack<int>();
+            thread_grid_task = new Queue<int>();
 
             this.Text = "Picu Screenshot - " + version;
         }
@@ -299,10 +299,10 @@ namespace Picu
         private void PreThread(string file)
         {
             // aggiunge il task al thread
-            thread_task.Push(file);
+            thread_task.Enqueue(file);
             // upload_list.dataGridView1.
             int n = upload_list.dataGridView1.Rows.Add(Path.GetFileName(file), "No, in attesa.", default_nolink);
-            thread_grid_task.Push(n);
+            thread_grid_task.Enqueue(n);
 
             // se il thread non è già attivo
             // lo starta
@@ -329,8 +329,8 @@ namespace Picu
             
             in_upload = true;
 
-            string file = thread_task.Pop();
-            int id = thread_grid_task.Pop();
+            string file = thread_task.Dequeue();
+            int id = thread_grid_task.Dequeue();
 
             upload_list.dataGridView1.Rows[id].Cells[1].Value = "In upload.. attendere";
 
