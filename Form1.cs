@@ -10,13 +10,15 @@ using System.Collections.Generic;
 using System.Threading;
 
 namespace Picu
-{
+{   
     public partial class Form1 : Form
     {
-        private const string version = "2.1.0";
+        private const string version = "2.1.1";
         private NotifyIcon icon;
         private System.Windows.Forms.Timer check;
-        private string last_screen;
+        private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
+                                                                            // mostrato nel picture box
+        private string last_ss_upload = null;                               // come sopra, solo si riferisce all'ultimo upload
         private const int info_time = 500;                                  // ms
         private ImageFormat format;
         private string estensione;
@@ -27,8 +29,6 @@ namespace Picu
         private Queue<int> thread_grid_task;
         private ListUp upload_list;
         private bool in_upload;
-        // fuck :V const not work :|
-       // private readonly WebClient wb = new WebClient();
 
         /**
          * grid default text
@@ -50,16 +50,25 @@ namespace Picu
             thread_task = new Queue<string>();
             upload_list = new ListUp();
             thread_grid_task = new Queue<int>();
+            icon = new NotifyIcon();
 
             this.Text = "Picu Screenshot - " + version;
+
+            icon.BalloonTipClicked += icon_BalloonTipClicked;
+        }
+
+        void icon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            if (last_ss_upload != null)
+            {
+                System.Diagnostics.Process.Start(last_ss_upload);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             catturaESalvaToolStripMenuItem.Checked = true;
             uploadAutomaticoToolStripMenuItem.Checked = true;
-
-            icon = new NotifyIcon();
            
             if (File.Exists("icon.ico"))
             {
@@ -153,6 +162,7 @@ namespace Picu
                 }
                 else icon.BalloonTipText = "Screen catturato e salvato.";
 
+                last_ss_upload = null;
                 icon.ShowBalloonTip(info_time);
             }
             else
@@ -161,6 +171,7 @@ namespace Picu
                 toolStripStatusLabel1.Text = "Screen catturato";
                 icon.BalloonTipText = "Screen catturato";
                 icon.ShowBalloonTip(info_time);
+                last_ss_upload = null;
 
                 last_screen = Environment.CurrentDirectory + "\\tmp." + estensione;
                 button3.Enabled = true;
@@ -336,7 +347,7 @@ namespace Picu
 
             WebClient wb = new WebClient();
 
-            wb.UploadFileCompleted   += (sender, e) => wb_UploadedEnded(sender, e, id);
+            wb.UploadFileCompleted   += (sender, e) => wb_UploadedEnded(sender, e, id, file);
             wb.UploadProgressChanged += (sender, e) => wb_UpdateProgress(sender, e, id);
 
             new Thread(
@@ -345,10 +356,9 @@ namespace Picu
                     wb.UploadFileAsync(new Uri(url_picu), file);
                 }
             ).Start();
-
         }
 
-        void wb_UploadedEnded(object sender, UploadFileCompletedEventArgs e, int id)
+        void wb_UploadedEnded(object sender, UploadFileCompletedEventArgs e, int id, string name)
         {
             if (e.Cancelled)
             {
@@ -358,8 +368,13 @@ namespace Picu
 
             BeginInvoke(new MethodInvoker(() =>
                 {
-                    upload_list.dataGridView1.Rows[id].Cells[2].Value = Encoding.ASCII.GetString(e.Result);
+                    last_ss_upload = Encoding.ASCII.GetString(e.Result);
+
+                    upload_list.dataGridView1.Rows[id].Cells[2].Value = last_ss_upload;
                     upload_list.dataGridView1.Rows[id].Cells[1].Value = "No, caricato.";
+
+                    icon.BalloonTipText = "File " + Path.GetFileName(name) + " caricato. Clicca per aprire.";
+                    icon.ShowBalloonTip(info_time);
                 }
             ));
 
@@ -407,6 +422,5 @@ namespace Picu
         {
             openFileDialog1.ShowDialog();
         }
-
     }
 }

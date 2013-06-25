@@ -1,10 +1,13 @@
-PScreenshot - Easy screenshots v2.0.1
+PScreenshot - Easy screenshots v2.1.1
 ===========
 Lo scopo dell'applicazione è permettere agli utenti di creare i screen dei propri desktop in modo immediato e vederli caricati in pochi secondi. <br />
 Usando il menù a sinistra è possibile personalizzare l'applicazione del formato delle immagini alla possibilità di caricare un'immagine a scelta.
 
 Changelog
 ===========
+v2.1.1
+* Ad ogni upload completato un messaggio comparirà sull'icona, cliccandolo sarà aperto l'url dell'immagine.
+
 v2.1.0
 * Aggiunta la percentuale di upload affianco alla scritta "In upload"
 
