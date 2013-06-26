@@ -30,14 +30,14 @@ namespace Picu
         private ListUp upload_list;
         private bool in_upload;
 
-        private enum TEXT_BALLONTIP_ACTION
+        private enum TEXT_BALLOONTIP_ACTION
         {
             OPEN_NOTHING,
             OPEN_PIC,
             OPEN_UPLOADLIST,
         }
 
-        private TEXT_BALLONTIP_ACTION action;
+        private TEXT_BALLOONTIP_ACTION action;
 
         /**
          * grid default text
@@ -68,14 +68,14 @@ namespace Picu
 
         void icon_BalloonTipClicked(object sender, EventArgs e)
         {
-            if (action == TEXT_BALLONTIP_ACTION.OPEN_PIC)
+            if (action == TEXT_BALLOONTIP_ACTION.OPEN_PIC)
             {
                 if (last_ss_upload != null)
                 {
                     System.Diagnostics.Process.Start(last_ss_upload);
                 }
             }
-            else if (action == TEXT_BALLONTIP_ACTION.OPEN_UPLOADLIST)
+            else if (action == TEXT_BALLOONTIP_ACTION.OPEN_UPLOADLIST)
             {
                 upload_list.Show();
             }
@@ -174,12 +174,12 @@ namespace Picu
                 {
                     icon.BalloonTipText = "Screen catturato e salvato, inserito nella lista upload.";
                     PreThread(url);
-                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_UPLOADLIST);
+                    ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_UPLOADLIST);
                 }
                 else
                 {
                     icon.BalloonTipText = "Screen catturato e salvato.";
-                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_NOTHING);
+                    ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_NOTHING);
                 }
 
                 icon.ShowBalloonTip(info_time);
@@ -191,8 +191,8 @@ namespace Picu
                 toolStripStatusLabel1.Text = "Screen catturato";
                 icon.BalloonTipText = "Screen catturato";
                 icon.ShowBalloonTip(info_time);
-                
-                ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_NOTHING);
+
+                ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_NOTHING);
 
                 last_screen = Environment.CurrentDirectory + "\\tmp." + estensione;
                 button3.Enabled = true;
@@ -391,7 +391,7 @@ namespace Picu
                     icon.BalloonTipText = "File " + Path.GetFileName(name) + " caricato. Clicca per aprire.";
                     icon.ShowBalloonTip(info_time);
 
-                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_PIC, last_ss_upload);
+                    ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_PIC, last_ss_upload);
                 }
             ));
 
@@ -420,12 +420,12 @@ namespace Picu
             openFileDialog1.ShowDialog();
         }
 
-        private void ChangeAction(TEXT_BALLONTIP_ACTION new_action)
+        private void ChangeAction(TEXT_BALLOONTIP_ACTION new_action)
         {
             action = new_action;
         }
 
-        private void ChangeAction(TEXT_BALLONTIP_ACTION new_action, string url)
+        private void ChangeAction(TEXT_BALLOONTIP_ACTION new_action, string url)
         {
             action = new_action;
             last_ss_upload = url;
