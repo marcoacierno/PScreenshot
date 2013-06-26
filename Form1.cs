@@ -13,7 +13,7 @@ namespace Picu
 {   
     public partial class Form1 : Form
     {
-        private const string version = "2.1.1";
+        private const string version = "2.1.2";
         private NotifyIcon icon;
         private System.Windows.Forms.Timer check;
         private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
@@ -29,6 +29,15 @@ namespace Picu
         private Queue<int> thread_grid_task;
         private ListUp upload_list;
         private bool in_upload;
+
+        private enum TEXT_BALLONTIP_ACTION
+        {
+            OPEN_NOTHING,
+            OPEN_PIC,
+            OPEN_UPLOADLIST,
+        }
+
+        private TEXT_BALLONTIP_ACTION action;
 
         /**
          * grid default text
@@ -59,9 +68,16 @@ namespace Picu
 
         void icon_BalloonTipClicked(object sender, EventArgs e)
         {
-            if (last_ss_upload != null)
+            if (action == TEXT_BALLONTIP_ACTION.OPEN_PIC)
             {
-                System.Diagnostics.Process.Start(last_ss_upload);
+                if (last_ss_upload != null)
+                {
+                    System.Diagnostics.Process.Start(last_ss_upload);
+                }
+            }
+            else if (action == TEXT_BALLONTIP_ACTION.OPEN_UPLOADLIST)
+            {
+                upload_list.Show();
             }
         }
 
@@ -95,7 +111,6 @@ namespace Picu
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);
-
         }
 
         void icon_MouseClick(object sender, MouseEventArgs e)
@@ -159,11 +174,16 @@ namespace Picu
                 {
                     icon.BalloonTipText = "Screen catturato e salvato, inserito nella lista upload.";
                     PreThread(url);
+                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_UPLOADLIST);
                 }
-                else icon.BalloonTipText = "Screen catturato e salvato.";
+                else
+                {
+                    icon.BalloonTipText = "Screen catturato e salvato.";
+                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_NOTHING);
+                }
 
-                last_ss_upload = null;
                 icon.ShowBalloonTip(info_time);
+                
             }
             else
             {
@@ -171,7 +191,8 @@ namespace Picu
                 toolStripStatusLabel1.Text = "Screen catturato";
                 icon.BalloonTipText = "Screen catturato";
                 icon.ShowBalloonTip(info_time);
-                last_ss_upload = null;
+                
+                ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_NOTHING);
 
                 last_screen = Environment.CurrentDirectory + "\\tmp." + estensione;
                 button3.Enabled = true;
@@ -322,12 +343,6 @@ namespace Picu
             {
                 RunUploader();
             }
-
-            /*
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }*/
         }
 
         private void RunUploader()
@@ -375,6 +390,8 @@ namespace Picu
 
                     icon.BalloonTipText = "File " + Path.GetFileName(name) + " caricato. Clicca per aprire.";
                     icon.ShowBalloonTip(info_time);
+
+                    ChangeAction(TEXT_BALLONTIP_ACTION.OPEN_PIC, last_ss_upload);
                 }
             ));
 
@@ -390,26 +407,6 @@ namespace Picu
             ));
         }
 
-        /*
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            while (thread_task.Count > 0)
-            {
-                string file = thread_task.Pop();
-                int id = thread_grid_task.Pop();
-
-                upload_list.dataGridView1.Rows[id].Cells[1].Value = "In upload";
-                
-                WebClient wb = new WebClient();
-
-                byte[] response = wb.UploadFile(url_picu, file);
-
-                upload_list.dataGridView1.Rows[id].Cells[2].Value = Encoding.ASCII.GetString(response);
-                upload_list.dataGridView1.Rows[id].Cells[1].Value = "No, caricato.";
-            }
-        }
-        */
-
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             foreach (string file in openFileDialog1.FileNames)
@@ -421,6 +418,17 @@ namespace Picu
         private void caricaUnimmagineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
+        }
+
+        private void ChangeAction(TEXT_BALLONTIP_ACTION new_action)
+        {
+            action = new_action;
+        }
+
+        private void ChangeAction(TEXT_BALLONTIP_ACTION new_action, string url)
+        {
+            action = new_action;
+            last_ss_upload = url;
         }
     }
 }
