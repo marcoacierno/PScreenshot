@@ -14,23 +14,22 @@ namespace Picu
     public partial class Form1 : Form
     {
         private const string version = "2.1.2";
-        private NotifyIcon icon;
+        public NotifyIcon icon;
         private System.Windows.Forms.Timer check;
         private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
                                                                             // mostrato nel picture box
-        private string last_ss_upload = null;                               // come sopra, solo si riferisce all'ultimo upload
-        private const int info_time = 500;                                  // ms
+        public string last_ss_upload = null;                               // come sopra, solo si riferisce all'ultimo upload
+        
+        public const int info_time = 500;                                  // ms
+
         private ImageFormat format;
         private string estensione;
         private bool cattura_salva;
         private bool instant_upload;                                        // uploadAutomaticoToolStripMenuItem
-        private const string url_picu = @"http://picu.site11.com/share_app.php";
-        private Queue<string> thread_task;
-        private Queue<int> thread_grid_task;
-        private ListUp upload_list;
-        private bool in_upload;
 
-        private enum TEXT_BALLOONTIP_ACTION
+        private ListUp upload_list;
+
+        public enum TEXT_BALLOONTIP_ACTION
         {
             OPEN_NOTHING,
             OPEN_PIC,
@@ -38,12 +37,6 @@ namespace Picu
         }
 
         private TEXT_BALLOONTIP_ACTION action;
-
-        /**
-         * grid default text
-         */
-        //private const string button_rem     = "Rimuovi";
-        public const string default_nolink = "No link";
 
         [DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey); 
@@ -54,12 +47,9 @@ namespace Picu
 
             cattura_salva = true;
             instant_upload = true;
-            in_upload = false;
 
-            thread_task = new Queue<string>();
-            upload_list = new ListUp();
-            thread_grid_task = new Queue<int>();
             icon = new NotifyIcon();
+            upload_list = new ListUp();
 
             this.Text = "Picu Screenshot - " + version;
 
@@ -173,7 +163,7 @@ namespace Picu
                 if (instant_upload)
                 {
                     icon.BalloonTipText = "Screen catturato e salvato, inserito nella lista upload.";
-                    PreThread(url);
+                    upload_list.PreThread(url);
                     ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_UPLOADLIST);
                 }
                 else
@@ -235,7 +225,7 @@ namespace Picu
             if (instant_upload)
             {
                 toolStripStatusLabel1.Text = "Screen salvato, inserito nella lista upload.";
-                PreThread(last_screen);
+                upload_list.PreThread(last_screen);
             }
             else toolStripStatusLabel1.Text = "Screen salvato";
         }
@@ -328,90 +318,12 @@ namespace Picu
             uploadAutomaticoToolStripMenuItem.Checked = instant_upload;
         }
 
-        private void PreThread(string file)
-        {
-            // aggiunge il task al thread
-            thread_task.Enqueue(file);
-            // upload_list.dataGridView1.
-            int n = upload_list.dataGridView1.Rows.Add(Path.GetFileName(file), "No, in attesa.", default_nolink);
-            thread_grid_task.Enqueue(n);
-
-            // se il thread non è già attivo
-            // lo starta
-
-            if (!in_upload)
-            {
-                RunUploader();
-            }
-        }
-
-        private void RunUploader()
-        {
-            if (thread_task.Count == 0)
-            {
-                in_upload = false;
-                return;
-            }
-            
-            in_upload = true;
-
-            string file = thread_task.Dequeue();
-            int id = thread_grid_task.Dequeue();
-
-            upload_list.dataGridView1.Rows[id].Cells[1].Value = "In upload.. attendere";
-
-            WebClient wb = new WebClient();
-
-            wb.UploadFileCompleted   += (sender, e) => wb_UploadedEnded(sender, e, id, file);
-            wb.UploadProgressChanged += (sender, e) => wb_UpdateProgress(sender, e, id);
-
-            new Thread(
-                () =>
-                {
-                    wb.UploadFileAsync(new Uri(url_picu), file);
-                }
-            ).Start();
-        }
-
-        void wb_UploadedEnded(object sender, UploadFileCompletedEventArgs e, int id, string name)
-        {
-            if (e.Cancelled)
-            {
-                MessageBox.Show("La richiesta è stata cancellata (?)");
-                return;
-            }
-
-            BeginInvoke(new MethodInvoker(() =>
-                {
-                    last_ss_upload = Encoding.ASCII.GetString(e.Result);
-
-                    upload_list.dataGridView1.Rows[id].Cells[2].Value = last_ss_upload;
-                    upload_list.dataGridView1.Rows[id].Cells[1].Value = "No, caricato.";
-
-                    icon.BalloonTipText = "File " + Path.GetFileName(name) + " caricato. Clicca per aprire.";
-                    icon.ShowBalloonTip(info_time);
-
-                    ChangeAction(TEXT_BALLOONTIP_ACTION.OPEN_PIC, last_ss_upload);
-                }
-            ));
-
-            RunUploader();
-        }
-
-        void wb_UpdateProgress(object sender, UploadProgressChangedEventArgs e, int id)
-        {
-            BeginInvoke(new MethodInvoker(() =>
-                {
-                    upload_list.dataGridView1.Rows[id].Cells[1].Value = "In Upload (" + e.ProgressPercentage + "%)";
-                }
-            ));
-        }
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             foreach (string file in openFileDialog1.FileNames)
             {
-                PreThread(file);
+                upload_list.PreThread(file);
             }
         }
 
@@ -420,12 +332,12 @@ namespace Picu
             openFileDialog1.ShowDialog();
         }
 
-        private void ChangeAction(TEXT_BALLOONTIP_ACTION new_action)
+        public void ChangeAction(TEXT_BALLOONTIP_ACTION new_action)
         {
             action = new_action;
         }
 
-        private void ChangeAction(TEXT_BALLOONTIP_ACTION new_action, string url)
+        public void ChangeAction(TEXT_BALLOONTIP_ACTION new_action, string url)
         {
             action = new_action;
             last_ss_upload = url;
