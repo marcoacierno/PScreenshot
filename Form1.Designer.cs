@@ -58,13 +58,14 @@
             this.catturaESalvaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uploadAutomaticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 109);
+            this.button1.Location = new System.Drawing.Point(317, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 22);
             this.button1.TabIndex = 0;
@@ -74,7 +75,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(317, 109);
+            this.button2.Location = new System.Drawing.Point(317, 40);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(77, 22);
             this.button2.TabIndex = 2;
@@ -86,7 +87,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(382, 91);
+            this.pictureBox1.Size = new System.Drawing.Size(299, 112);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -95,7 +96,7 @@
             // button3
             // 
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(163, 109);
+            this.button3.Location = new System.Drawing.Point(317, 12);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(77, 22);
             this.button3.TabIndex = 5;
@@ -203,19 +204,34 @@
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(317, 96);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(77, 23);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Scegli";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 158);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Picu Screenshot";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -242,6 +258,7 @@
         private System.Windows.Forms.ToolStripMenuItem uploadAutomaticoToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem caricaUnimmagineToolStripMenuItem;
+        private System.Windows.Forms.Button button4;
     }
 }
 

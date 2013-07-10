@@ -18,9 +18,9 @@ namespace Picu
         private System.Windows.Forms.Timer check;
         private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
                                                                             // mostrato nel picture box
-        public string last_ss_upload = null;                               // come sopra, solo si riferisce all'ultimo upload
+        public string last_ss_upload = null;                                // come sopra, solo si riferisce all'ultimo upload
         
-        public const int info_time = 500;                                  // ms
+        public const int info_time = 500;                                   // ms
 
         private ImageFormat format;
         private string estensione;
@@ -28,12 +28,13 @@ namespace Picu
         private bool instant_upload;                                        // uploadAutomaticoToolStripMenuItem
 
         private ListUp upload_list;
+        private FormWindowState form_state = FormWindowState.Minimized;
 
-        public enum TEXT_BALLOONTIP_ACTION
+        public enum TEXT_BALLOONTIP_ACTION // Indica l'azione che deve essere eseguita quando si preme sul balloon tip
         {
-            OPEN_NOTHING,
-            OPEN_PIC,
-            OPEN_UPLOADLIST,
+            OPEN_NOTHING,                   // Non deve eseguire niente
+            OPEN_PIC,                       // Indica che deve aprire l'url dell'immagine
+            OPEN_UPLOADLIST,                // Indica che deve aprire l'upload ilst
         }
 
         private TEXT_BALLOONTIP_ACTION action;
@@ -56,6 +57,7 @@ namespace Picu
             icon.BalloonTipClicked += icon_BalloonTipClicked;
         }
 
+        //Si riferisce a quando si clicca sul testo dell'icona
         void icon_BalloonTipClicked(object sender, EventArgs e)
         {
             if (action == TEXT_BALLOONTIP_ACTION.OPEN_PIC)
@@ -95,23 +97,24 @@ namespace Picu
 
             format = ImageFormat.Png;
             estensione = "png";
-
+            /*
             // thanks to Noam Gal
             // http://stackoverflow.com/questions/1385674/place-winform-on-bottom-right
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width,
-                                      workingArea.Bottom - Size.Height);
+                                      workingArea.Bottom - Size.Height);*/
         }
 
         void icon_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                DoScreen();
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
             }
             else if (e.Button == MouseButtons.Right)
             {
-                this.WindowState = FormWindowState.Normal;
+                DoScreen();
             }
         }
 
@@ -341,6 +344,25 @@ namespace Picu
         {
             action = new_action;
             last_ss_upload = url;
+        }
+
+        // Come caricaUnimmagineToolStripMenuItem_Click
+        private void button4_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (form_state != this.WindowState)
+            {
+                form_state = this.WindowState;
+
+                if (form_state == FormWindowState.Minimized)
+                {
+                    this.ShowInTaskbar = false;
+                }
+            }
         }
     }
 }
