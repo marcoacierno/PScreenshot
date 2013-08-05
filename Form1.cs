@@ -13,14 +13,14 @@ namespace Picu
 {   
     public partial class Form1 : Form
     {
-        private const string version = "2.1.2";
+        private const string version = "2.3";
         public NotifyIcon icon;
         private System.Windows.Forms.Timer check;
         private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
                                                                             // mostrato nel picture box
         public string last_ss_upload = null;                                // come sopra, solo si riferisce all'ultimo upload
         
-        public const int info_time = 500;                                   // ms
+        public const int info_time = 500;                                   // balloon time
 
         private ImageFormat format;
         private string estensione;
@@ -28,7 +28,7 @@ namespace Picu
         private bool instant_upload;                                        // uploadAutomaticoToolStripMenuItem
 
         private ListUp upload_list;
-        private FormWindowState form_state = FormWindowState.Minimized;
+        private FormWindowState form_state = FormWindowState.Minimized;     // ricorda l'ultimo stato della form
 
         public enum TEXT_BALLOONTIP_ACTION // Indica l'azione che deve essere eseguita quando si preme sul balloon tip
         {
@@ -51,6 +51,13 @@ namespace Picu
 
             icon = new NotifyIcon();
             upload_list = new ListUp();
+            
+            upload_list.Opacity = 0.0;
+            
+            upload_list.Show();
+            upload_list.Close();
+            
+            upload_list.Opacity = 100.0;
 
             this.Text = "Picu Screenshot - " + version;
 
@@ -103,6 +110,9 @@ namespace Picu
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);*/
+
+            icon.BalloonTipText = "Benvenuto!";
+            icon.ShowBalloonTip(info_time);
         }
 
         void icon_MouseClick(object sender, MouseEventArgs e)
@@ -260,6 +270,7 @@ namespace Picu
 
         }
 
+        #region Menu stuff
         private void pngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //png
@@ -321,7 +332,6 @@ namespace Picu
             uploadAutomaticoToolStripMenuItem.Checked = instant_upload;
         }
 
-
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             foreach (string file in openFileDialog1.FileNames)
@@ -335,6 +345,9 @@ namespace Picu
             openFileDialog1.ShowDialog();
         }
 
+        #endregion
+
+        #region Ballon tip
         public void ChangeAction(TEXT_BALLOONTIP_ACTION new_action)
         {
             action = new_action;
@@ -345,6 +358,7 @@ namespace Picu
             action = new_action;
             last_ss_upload = url;
         }
+        #endregion
 
         // Come caricaUnimmagineToolStripMenuItem_Click
         private void button4_Click(object sender, EventArgs e)
@@ -361,6 +375,27 @@ namespace Picu
                 if (form_state == FormWindowState.Minimized)
                 {
                     this.ShowInTaskbar = false;
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (upload_list.in_upload)
+            {
+                // comunicare insieme al msg anche
+                //DialogResult rs = MessageBox.Show("Un upload è attualmente in corso, sei sicuro di voler uscire?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Warning );
+                // fermare l'upload (?)
+
+                switch (MessageBox.Show("Un upload è attualmente in corso, sei sicuro di voler uscire?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    case System.Windows.Forms.DialogResult.No:
+                        e.Cancel = true;
+                        break;
+                    //case System.Windows.Forms.DialogResult.Yes:
+                    //    //
+                    //    upload_list.AbortUpload();
+                    //    break;
                 }
             }
         }

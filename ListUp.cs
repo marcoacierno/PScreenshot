@@ -9,7 +9,6 @@ using System.Text;
 using System.Collections.Generic;
 using System.Threading;
 
-
 namespace Picu
 {
     public partial class ListUp : Form
@@ -18,8 +17,20 @@ namespace Picu
         private const string url_picu = @"http://picu.site11.com/share_app.php";
         public Queue<string> thread_task;
         public Queue<int> thread_grid_task;
-        private bool in_upload;
+        public bool in_upload {get; private set;}
         public const string default_nolink = "No link";
+
+        private const string list_uploads = "files.txt";
+
+        
+
+        public enum CURRENT_SHOW
+        {
+            IN_UPLOAD_LIST,
+            ARD_UPLOADED,
+        };
+
+        private CURRENT_SHOW current_show;
 
         public ListUp()
         {
@@ -31,10 +42,46 @@ namespace Picu
 
             thread_task = new Queue<string>();
             thread_grid_task = new Queue<int>();
+
+            toolStripStatusLabel1.Text = "Clicca qui per aprire la lista delle immagini già caricate.";
+            current_show = CURRENT_SHOW.IN_UPLOAD_LIST;
+
+            UpdateList_ALD();
+
+        }
+
+        void UpdateList_ALD()
+        {
+            // init old list
+            if (File.Exists("files.txt"))
+            {
+                using (StreamReader sr = new StreamReader(list_uploads))
+                {
+                    // so simple at all
+                    // just
+                    // nome file | url
+
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        // here i miss list() php
+                        string[] arr = line.Split('|');
+
+                        if (arr.Length < 2)// invalid string, continue.
+                            continue;
+
+                        int x = dataGridView2.Rows.Add();
+
+                        dataGridView2.Rows[x].Cells[0].Value = arr[0];
+                        dataGridView2.Rows[x].Cells[1].Value = arr[1];
+                    }
+                }
+            }
         }
 
         void ListUp_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // lo nasconde solamente
             e.Cancel = true;
             this.Hide();
         }
@@ -126,11 +173,36 @@ namespace Picu
                 Program.form1.icon.ShowBalloonTip(Form1.info_time);
 
                 Program.form1.ChangeAction(Form1.TEXT_BALLOONTIP_ACTION.OPEN_PIC, Program.form1.last_ss_upload);
+
+                int x = dataGridView2.Rows.Add();
+
+                dataGridView2.Rows[x].Cells[0].Value = Path.GetFileName(name);
+                dataGridView2.Rows[x].Cells[1].Value = Encoding.ASCII.GetString(e.Result);//last ss upload not work here, but why?
             }
             ));
 
+            //
+            using (StreamWriter sw = new StreamWriter(list_uploads, true))
+            {
+                sw.WriteLine(Path.GetFileName(name) + "|" + Program.form1.last_ss_upload);
+            }
+
             RunUploader();
         }
+
+        // Can be done, but RunUploader code should be improved to allow this feature
+        //public void AbortUpload()
+        //{
+        //    // pulisco le griglie
+        //    thread_task.Clear();
+        //    thread_grid_task.Clear();
+
+        //    // cancello tutta la griglia, non c'è niente in upload
+        //    dataGridView1.Rows.Clear();
+
+        //    // cancello la richiesta
+        //    wb.CancelAsync();
+        //}
 
         void wb_UpdateProgress(object sender, UploadProgressChangedEventArgs e, int id)
         {
@@ -144,6 +216,26 @@ namespace Picu
         private void ListUp_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            if (current_show == CURRENT_SHOW.IN_UPLOAD_LIST)
+            {
+                dataGridView1.Visible = false;
+                dataGridView2.Visible = true;
+
+                current_show = CURRENT_SHOW.ARD_UPLOADED;
+                toolStripStatusLabel1.Text = "Clicca qui per aprire la lista delle immagini che sono in upload.";
+            }
+            else
+            {
+                dataGridView1.Visible = true;
+                dataGridView2.Visible = false;
+
+                current_show = CURRENT_SHOW.IN_UPLOAD_LIST;
+                toolStripStatusLabel1.Text = "Clicca qui per aprire la lista delle immagini già caricate.";
+            }
         }
     }
 }
