@@ -5,6 +5,9 @@ Usando il menù a sinistra è possibile personalizzare l'applicazione del format
 
 Changelog
 ===========
+v2.2
+* Con l'ultima versione è possibile avere una lista di tutti gli screen caricati
+
 v2.1.2
 * Il balloon tip è più "interattivo" ora
 
