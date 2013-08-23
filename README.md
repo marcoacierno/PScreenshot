@@ -5,6 +5,17 @@ Usando il menù a sinistra è possibile personalizzare l'applicazione del format
 
 Changelog
 ===========
+2.5
+* Da ora è possibile trascinare i files che vuoi caricare direttamente sul form di Picu invece di dover scegliere manualmente i files
+* Invertiti i tasti, premendo sulla tray icon con il sinistro si farà uno screen invece premendo con il destro si aprirà il form di picu (mouse)
+* L’icona di picu è stata inclusa all’interno del exe in modo da evitare eventuali bug dovuti alla sua assenza
+* E’ stata aggiunta l’icona ai form dell’applicazione
+* E’ stato inserito un sistema che evita l’avvio multiplo dell’applicazione
+<br />
+Tra le novità che non richiedono un aggiornamento dell’applicazione (Disponibili su tutte le versioni anche precedenti):
+
+* Aggiunta la possibilità di caricare files .ico
+
 v2.2
 * Con l'ultima versione è possibile avere una lista di tutti gli screen caricati
 
