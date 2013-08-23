@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8ACBACDA-8E65-4F4A-A179-AE3FD714A8B9}</ProjectGuid>
+    <ProjectGuid>{16FC42A9-6104-47F3-99B5-D5D7992A4330}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Picu</RootNamespace>

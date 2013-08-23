@@ -13,7 +13,7 @@ namespace Picu
 {   
     public partial class Form1 : Form
     {
-        private const string version = "2.3";
+        private const string version = "2.5";
         public NotifyIcon icon;
         private System.Windows.Forms.Timer check;
         private string last_screen;                                         // si riferisce all'ultimo screen salvato che è
@@ -29,6 +29,8 @@ namespace Picu
 
         private ListUp upload_list;
         private FormWindowState form_state = FormWindowState.Minimized;     // ricorda l'ultimo stato della form
+
+        private bool specialState = false;
 
         public enum TEXT_BALLOONTIP_ACTION // Indica l'azione che deve essere eseguita quando si preme sul balloon tip
         {
@@ -62,6 +64,8 @@ namespace Picu
             this.Text = "Picu Screenshot - " + version;
 
             icon.BalloonTipClicked += icon_BalloonTipClicked;
+
+            this.Icon = new Icon(Properties.Resources.icon, 40, 40);
         }
 
         //Si riferisce a quando si clicca sul testo dell'icona
@@ -85,14 +89,20 @@ namespace Picu
             catturaESalvaToolStripMenuItem.Checked = true;
             uploadAutomaticoToolStripMenuItem.Checked = true;
            
-            if (File.Exists("icon.ico"))
-            {
-                icon.Icon = new Icon("icon.ico", 40, 40);
-            }
+            //if (File.Exists("icon.ico"))
+            //{
+            icon.Icon = new Icon(Properties.Resources.icon, 40, 40);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Il file icon.ico non è stato trovato, l'icon tray non è disponibile.");
+            //    specialState = true;
+            //    //icon.Icon = new Icon(, 40, 40);
+            //}
             
             icon.Text = "Picu - Screenshot";
             icon.MouseClick += icon_MouseClick;
-            
+
             icon.Visible = true;
 
             check = new System.Windows.Forms.Timer();
@@ -113,16 +123,22 @@ namespace Picu
 
             icon.BalloonTipText = "Benvenuto!";
             icon.ShowBalloonTip(info_time);
+
+            if (specialState)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+
         }
 
         void icon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Right)
             {
                 this.WindowState = FormWindowState.Normal;
                 this.ShowInTaskbar = true;
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Left)
             {
                 DoScreen();
             }
@@ -368,6 +384,8 @@ namespace Picu
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
+            if (specialState) return;
+
             if (form_state != this.WindowState)
             {
                 form_state = this.WindowState;
@@ -398,6 +416,28 @@ namespace Picu
                     //    break;
                 }
             }
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            FileInfo fi;
+
+            foreach(string file in files)
+            {
+                fi = new FileInfo(file);
+                upload_list.PreThread(fi.FullName);
+            }
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void ValidFile(string Extension)
+        {
+
         }
     }
 }

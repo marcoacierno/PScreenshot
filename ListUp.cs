@@ -14,15 +14,13 @@ namespace Picu
     public partial class ListUp : Form
     {
         // error messages
-        private const string url_picu = @"http://picu.site11.com/share_app.php";
+        private Uri url_picu = new Uri(@"http://picu.site11.com/share_app.php");
         public Queue<string> thread_task;
         public Queue<int> thread_grid_task;
         public bool in_upload {get; private set;}
         public const string default_nolink = "No link";
 
         private const string list_uploads = "files.txt";
-
-        
 
         public enum CURRENT_SHOW
         {
@@ -48,6 +46,7 @@ namespace Picu
 
             UpdateList_ALD();
 
+            this.Icon = new Icon(Properties.Resources.icon, 40, 40);
         }
 
         void UpdateList_ALD()
@@ -149,7 +148,7 @@ namespace Picu
             new Thread(
                 () =>
                 {
-                    wb.UploadFileAsync(new Uri(url_picu), file);
+                    wb.UploadFileAsync(url_picu, file);
                 }
             ).Start();
         }
