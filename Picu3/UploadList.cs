@@ -23,8 +23,8 @@ namespace Picu3
             else
                 this.Icon = new Icon("icon.ico", 128, 128);
 
-            this.ShowIcon = false;
-
+            //this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.listView2.MouseDoubleClick += listView1_MouseDoubleClick;
         }
 

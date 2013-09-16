@@ -29,6 +29,15 @@ namespace Picu3
                 MessageBox.Show("Impossibile trovare settings.ico");
             else
                 this.Icon = new Icon("settings.ico", 128, 128);
+
+            long peso = 0;
+
+            foreach(string file in Directory.GetFiles(Form1.settings.GalleryDir))
+            {
+                peso += new FileInfo(file).Length;
+            }
+
+            pesogalleria.Text = ((peso / 1024f) / 1024f) + " mb";
         }
 
         private void Impostazioni_Load(object sender, EventArgs e)
@@ -62,6 +71,7 @@ namespace Picu3
             File.Delete("images.txt");
 
             MessageBox.Show("Galleria pulita, files: " + files.Length);
+            pesogalleria.Text = "0 mb";
         }
     }
 }

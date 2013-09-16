@@ -158,6 +158,8 @@ namespace Picu3
             }
         }
 
+        #region File drop
+
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -171,6 +173,7 @@ namespace Picu3
         private void Form1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-        }
+        } 
+        #endregion
     }
 }
