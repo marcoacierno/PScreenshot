@@ -45,9 +45,13 @@ namespace Picu3
             set
             {
                 _GalleryDir = value;
+                GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\" + value;
+
                 SaveConfig();
             }
         }
+
+        public string GalleryPath;
 
         #region Save and Load
         /// <summary>
@@ -58,6 +62,7 @@ namespace Picu3
             _ScreenArea = SCREEN_AREA.CAPTURE_ALL;
             _Formato = ImageFormat.Png;
             _GalleryDir = "Galleria";
+            GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\Galleria";
 
             SaveConfig();
         }
@@ -67,7 +72,7 @@ namespace Picu3
         /// </summary>
         public void LoadConfig()
         {
-            if (!File.Exists("settings.xml")) { DefaultConfig(); return; }
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\settings.xml")) { DefaultConfig(); return; }
 
             try
             {
@@ -96,6 +101,7 @@ namespace Picu3
                                 reader.Read();
                                 readed = true;
                                 _GalleryDir = reader.Value;
+                                GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\" + _GalleryDir;
                                 break;
                         }
                     }
@@ -121,7 +127,7 @@ namespace Picu3
                 XmlWriterSettings wsetitngs = new XmlWriterSettings();
                 wsetitngs.Indent = true;
 
-                using (XmlWriter writer = XmlWriter.Create("settings.xml", wsetitngs))
+                using (XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\settings.xml", wsetitngs))
                 {
                     writer.WriteStartDocument();
 

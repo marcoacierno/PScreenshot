@@ -35,7 +35,6 @@ namespace Picu3
         public static Uri url = new Uri(@"http://picu.site11.com/share_app.php");
 
         private WebClient wc = new WebClient();
-
         /// <summary>
         /// Una copia del form UploadList, usato per accedere ai membri per lavorare sulle liste
         /// </summary>
@@ -63,39 +62,63 @@ namespace Picu3
 
             inWorking = false;
         }
-
+        /// <summary>
+        /// Chaimato dall'uploader quando ci sono aggiornamenti nell'upload (per ottenere la percentuale)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void wc_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
             uploadlist.UpdateResultStatus(working_UI.listViewID, e.ProgressPercentage.ToString() + "%");
         }
 
+        /// <summary>
+        /// Chiamato dall'uploader quando l'upload è terminato; comunica il risultato e riavvia l'uploader fino a completare la coda
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void wc_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
         {
-            Uri isOk;
-            string result = Encoding.ASCII.GetString(e.Result);
-
-            if (Uri.TryCreate(result, UriKind.Absolute, out isOk) && isOk.Scheme == Uri.UriSchemeHttp)
+            try
             {
-                // L'upload è terminato con successo
-                uploadlist.UpdateGroup(working_UI.listViewID, 1);
-                uploadlist.UpdateResultStatus(working_UI.listViewID, "Completato! Clicca per aprire");
-                uploadlist.UpdateToolTipText(working_UI.listViewID, result);
+                Uri isOk;
+                string result = Encoding.ASCII.GetString(e.Result);
 
-                DoScreen.UpdateScreenList(working_UI.fileName, result, false);
+                if (Uri.TryCreate(result, UriKind.Absolute, out isOk) && isOk.Scheme == Uri.UriSchemeHttp)
+                {
+                    // L'upload è terminato con successo
+                    uploadlist.UpdateGroup(working_UI.listViewID, 1);
+                    uploadlist.UpdateResultStatus(working_UI.listViewID, "Completato! Clicca per aprire");
+                    uploadlist.UpdateToolTipText(working_UI.listViewID, result);
+
+                    DoScreen.UpdateScreenList(working_UI.fileName, result, false);
+                }
+                else
+                {
+                    // Si è verificato un errore
+                    uploadlist.UpdateGroup(working_UI.listViewID, 2);
+                    uploadlist.UpdateResultStatus(working_UI.listViewID, result);
+
+                    DoScreen.UpdateScreenList(working_UI.fileName, result, true);
+
+                    Logs.Log("L'upload del file è fallito. Errore: " + result);
+                }
             }
-            else
+            catch(Exception ee)
             {
-                // Si è verificato un errore
+                Logs.Log("Exception dall'uploader; Expcetion: " + ee.Message + " ; Stack trace: " + ee.StackTrace);
+                Logs.Log("^^ Innerexception: " + ee.InnerException.Message + " ; stack trace: " + ee.InnerException.StackTrace);
+
                 uploadlist.UpdateGroup(working_UI.listViewID, 2);
-                uploadlist.UpdateResultStatus(working_UI.listViewID, result);
+                uploadlist.UpdateResultStatus(working_UI.listViewID, "Impossibile risolvere l'host (?)");
 
-                DoScreen.UpdateScreenList(working_UI.fileName, result, true);
-
-                Logs.Log("L'upload del file è fallito. Errore: " + result);
+                DoScreen.UpdateScreenList(working_UI.fileName, "??", true);
             }
-
-            // Riesegue l'uploader fino a completare la queue
-            RunUploader();
+            finally
+            {
+                // Riesegue l'uploader fino a completare la queue
+                RunUploader();
+            }
         }
 
         /// <summary>

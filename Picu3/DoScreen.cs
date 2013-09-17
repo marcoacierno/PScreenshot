@@ -22,19 +22,19 @@ namespace Picu3
                 format = Form1.settings.Formato;
             }
 
-            if (!Directory.Exists(Environment.CurrentDirectory + "\\" + Form1.settings.GalleryDir + "\\"))
+            if (!Directory.Exists(Form1.settings.GalleryPath))
             {
-                Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + Form1.settings.GalleryDir + "\\");
+                Directory.CreateDirectory(Form1.settings.GalleryPath);
             }
 
             string time = DateTime.Now.ToString("dd-mm-yyyy HH-mm-ss");
-            string url = Environment.CurrentDirectory + "\\" + Form1.settings.GalleryDir + "\\" + time + "." + Utils.StringFromImageFormat(format);
+            string url = Form1.settings.GalleryPath + "\\" + time + "." + Utils.StringFromImageFormat(format);
 
             int idx = 1;
 
             while (File.Exists(url))
             {
-                url = Environment.CurrentDirectory + "\\" + Form1.settings.GalleryDir + "\\" + time + " (" + idx + ")" + "." + Utils.StringFromImageFormat(format);
+                url = Form1.settings.GalleryPath + "\\" + time + " (" + idx + ")" + "." + Utils.StringFromImageFormat(format);
                 ++idx;
             }
 

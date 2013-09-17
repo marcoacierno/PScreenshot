@@ -47,7 +47,7 @@ namespace Picu3
     {
         public static void Log(string text)
         {
-            using(StreamWriter sw = new StreamWriter("logs.txt", true))
+            using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\logs.txt", true))
             {
                 sw.WriteLine("[" + DateTime.Now.ToString() + "]: " + text);
             }

@@ -13,6 +13,11 @@ namespace Picu3
         [STAThread]
         static void Main()
         {
+            if (!System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ "\\Picu\\"))
+            {
+                System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\");
+            }
+
             try
             {
                 using (Mutex _m = new Mutex(false, "OEsN-O6mS-AIge-Q6kN-qxy7-HDcb-O8wt-EyZg"))
@@ -32,6 +37,7 @@ namespace Picu3
             }
             catch(Exception e)
             {
+                MessageBox.Show("Picu ha riscontrato un erorre!\nPer informazioni leggere il file logs.txt (" + e.Message + ")\nIl programma è stato chiuso");
                 Logs.Log("Exception: " + e.Message + "; Stack trace: " + e.StackTrace);
             }
         }

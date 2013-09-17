@@ -32,7 +32,7 @@ namespace Picu3
 
             long peso = 0;
 
-            foreach(string file in Directory.GetFiles(Form1.settings.GalleryDir))
+            foreach (string file in Directory.GetFiles(Form1.settings.GalleryPath))
             {
                 peso += new FileInfo(file).Length;
             }
@@ -61,7 +61,7 @@ namespace Picu3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles(Form1.settings.GalleryDir);
+            string[] files = Directory.GetFiles(Form1.settings.GalleryPath);
 
             foreach(string file in files)
             {
