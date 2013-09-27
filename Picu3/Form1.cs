@@ -18,7 +18,8 @@ namespace Picu3
         /// <summary>
         /// Versione del programma
         /// </summary>
-        private const string version = "3.0";
+        private const string version = "3.0.1"; 
+
         /// <summary>
         /// Si riferisce al form che contiene l'upload list
         /// </summary>
@@ -35,6 +36,7 @@ namespace Picu3
         /// Settings del programma
         /// </summary>
         public static Settings settings;
+        public Impostazioni impostazioni;
 
         #region Esterni
         [DllImport("user32.dll")]
@@ -76,6 +78,8 @@ namespace Picu3
                 MessageBox.Show("Impossibile trovare icon.ico");
             else
                 this.Icon = new Icon("icon.ico", 128, 128);
+
+            impostazioni = new Impostazioni();
         }
 
         /// <summary>
@@ -141,7 +145,6 @@ namespace Picu3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Impostazioni impostazioni = new Impostazioni();
             impostazioni.Show();
         }
 

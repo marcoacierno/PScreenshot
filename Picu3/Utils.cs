@@ -41,6 +41,20 @@ namespace Picu3
         {
             return extensions.ContainsKey(extension);
         }
+
+        /// <summary>
+        /// Cancella tutti i files della lista o dal computer se deleteFiles è true.
+        /// </summary>
+        /// <param name="deleteFiles">Se true verranno cancellati tutti i files</param>
+        public static void ClearList(bool deleteFiles)
+        {
+            if (Directory.Exists(Form1.settings.GalleryPath) && deleteFiles)
+            {
+                Directory.Delete(Form1.settings.GalleryPath, true);
+            }
+
+            File.Delete(Settings._ImagesList);
+        }
     }
 
     class Logs

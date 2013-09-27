@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("In Upload", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("OK", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Errore", System.Windows.Forms.HorizontalAlignment.Left);
@@ -42,9 +43,13 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.lista.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,6 +96,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // header_name
@@ -118,6 +124,7 @@
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.listView2.ContextMenuStrip = this.contextMenuStrip1;
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup4.Header = "OK";
             listViewGroup4.Name = "Terminati con successo";
@@ -143,6 +150,28 @@
             this.columnHeader2.Text = "Risultato";
             this.columnHeader2.Width = 145;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancellaListaToolStripMenuItem,
+            this.cancellaListaFilesToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 48);
+            // 
+            // cancellaListaToolStripMenuItem
+            // 
+            this.cancellaListaToolStripMenuItem.Name = "cancellaListaToolStripMenuItem";
+            this.cancellaListaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.cancellaListaToolStripMenuItem.Text = "Cancella lista";
+            this.cancellaListaToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaToolStripMenuItem_Click);
+            // 
+            // cancellaListaFilesToolStripMenuItem
+            // 
+            this.cancellaListaFilesToolStripMenuItem.Name = "cancellaListaFilesToolStripMenuItem";
+            this.cancellaListaFilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
+            this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
+            // 
             // UploadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +185,7 @@
             this.tabControl1.ResumeLayout(false);
             this.inupload.ResumeLayout(false);
             this.lista.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -171,5 +201,8 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cancellaListaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaListaFilesToolStripMenuItem;
     }
 }

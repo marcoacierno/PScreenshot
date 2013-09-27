@@ -29,7 +29,21 @@ namespace Picu3
                 MessageBox.Show("Impossibile trovare settings.ico");
             else
                 this.Icon = new Icon("settings.ico", 128, 128);
+        }
 
+        private void Impostazioni_Load(object sender, EventArgs e)
+        {
+            // Might be very slow if the gallery is full
+            pesogalleria.Text = Math.Round(((pesoGalleria() / 1024f) / 1024f), 1) + " MB";
+        }
+
+        /// <summary>
+        /// Questo metodo si occupa di calcolare lo spazio occupato da tutti i files della galleria
+        /// </summary>
+        /// <returns>Ritorna il peso in bytes</returns>
+        private double pesoGalleria()
+        {
+            if (!Directory.Exists(Form1.settings.GalleryPath)) return 0.0;
             long peso = 0;
 
             foreach (string file in Directory.GetFiles(Form1.settings.GalleryPath))
@@ -37,12 +51,7 @@ namespace Picu3
                 peso += new FileInfo(file).Length;
             }
 
-            pesogalleria.Text = Math.Round(((peso / 1024f) / 1024f), 1) + " MB";
-        }
-
-        private void Impostazioni_Load(object sender, EventArgs e)
-        {
-            
+            return peso;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -61,17 +70,9 @@ namespace Picu3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles(Form1.settings.GalleryPath);
-
-            foreach(string file in files)
-            {
-                File.Delete(file);
-            }
-
-            File.Delete("images.txt");
-
-            MessageBox.Show("Galleria pulita, files: " + files.Length);
+            Utils.ClearList(true);
             pesogalleria.Text = "0 MB";
+            MessageBox.Show("Galleria pulita");
         }
     }
 }

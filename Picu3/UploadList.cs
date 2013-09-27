@@ -126,13 +126,13 @@ namespace Picu3
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
-                if (!File.Exists("images.txt")) return;
+                if (!File.Exists(Settings._ImagesList)) { listView2.Items.Clear(); return; }
                 try
                 {
                     listView2.Items.Clear();
 
                     // ToDo Convert to XML?
-                    using (StreamReader reader = new StreamReader("images.txt"))
+                    using (StreamReader reader = new StreamReader(Settings._ImagesList))
                     {
                         string line;
 
@@ -178,6 +178,21 @@ namespace Picu3
                     MessageBox.Show("Si è verificato un errore nel caricare la lista delle immagini.");
                 }
             }
+        }
+
+        private void cancellaListaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.ClearList(false);
+        }
+
+        private void cancellaListaFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.ClearList(true);
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

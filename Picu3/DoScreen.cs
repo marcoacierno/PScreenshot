@@ -62,7 +62,7 @@ namespace Picu3
 
         public static void UpdateScreenList(string name, string result, bool error)
         {
-            using(StreamWriter w = new StreamWriter("images.txt", true))
+            using (StreamWriter w = new StreamWriter(Settings._ImagesList, true))
             {
                 w.WriteLine(name + "|" + result + "|" + error.ToString());
             }

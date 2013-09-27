@@ -50,6 +50,7 @@ namespace Picu3
                 SaveConfig();
             }
         }
+        public static string _ImagesList = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\images.txt";
 
         public string GalleryPath;
 
@@ -109,7 +110,8 @@ namespace Picu3
 
                 Logs.Log("Caricamento config OK. Memoria liberata con successo.");
             }
-            catch (Exception e) { 
+            catch (Exception e) 
+            { 
                 // Loading fallito
                 // Carica default config
                 Logs.Log("Caricamento del config fallito. Exception: " + e.Message + " ; Stack trace:" + e.StackTrace);
