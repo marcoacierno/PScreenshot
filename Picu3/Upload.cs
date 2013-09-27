@@ -15,10 +15,25 @@ namespace Picu3
     /// </summary>
     struct UploadInfo
     {
+        /// <summary>
+        /// Contiene il nome del file
+        /// </summary>
         public string fileName;
+        /// <summary>
+        /// Contiene l'url del file
+        /// </summary>
         public string fileUrl;
+        /// <summary>
+        /// Contiene l'ID assegnato all'upload
+        /// </summary>
         public ListViewItem listViewID;
 
+        /// <summary>
+        /// Costruttore
+        /// </summary>
+        /// <param name="fname">Nome del file</param>
+        /// <param name="path">L'url del file</param>
+        /// <param name="id">L'id assegnato</param>
         public UploadInfo(string fname, string path, ListViewItem id)
         {
             fileName = fname;

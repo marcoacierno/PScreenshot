@@ -37,7 +37,7 @@ namespace Picu3
                 peso += new FileInfo(file).Length;
             }
 
-            pesogalleria.Text = ((peso / 1024f) / 1024f) + " mb";
+            pesogalleria.Text = Math.Round(((peso / 1024f) / 1024f), 1) + " MB";
         }
 
         private void Impostazioni_Load(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Picu3
             File.Delete("images.txt");
 
             MessageBox.Show("Galleria pulita, files: " + files.Length);
-            pesogalleria.Text = "0 mb";
+            pesogalleria.Text = "0 MB";
         }
     }
 }
