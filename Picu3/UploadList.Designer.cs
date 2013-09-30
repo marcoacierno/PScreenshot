@@ -39,6 +39,9 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.header_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.header_result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancellaCodaUploadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaCodaUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lista = new System.Windows.Forms.TabPage();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,6 +51,7 @@
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.lista.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +83,7 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.header_name,
             this.header_result});
+            this.listView1.ContextMenuStrip = this.contextMenuStrip2;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup1.Header = "In Upload";
             listViewGroup1.Name = "in_upload";
@@ -108,6 +113,28 @@
             // 
             this.header_result.Text = "Risultato";
             this.header_result.Width = 148;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancellaCodaUploadsToolStripMenuItem,
+            this.cancellaCodaUploadToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(200, 70);
+            // 
+            // cancellaCodaUploadsToolStripMenuItem
+            // 
+            this.cancellaCodaUploadsToolStripMenuItem.Name = "cancellaCodaUploadsToolStripMenuItem";
+            this.cancellaCodaUploadsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cancellaCodaUploadsToolStripMenuItem.Text = "Cancella coda uploads";
+            this.cancellaCodaUploadsToolStripMenuItem.Click += new System.EventHandler(this.cancellaCodaUploadsToolStripMenuItem_Click);
+            // 
+            // cancellaCodaUploadToolStripMenuItem
+            // 
+            this.cancellaCodaUploadToolStripMenuItem.Name = "cancellaCodaUploadToolStripMenuItem";
+            this.cancellaCodaUploadToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cancellaCodaUploadToolStripMenuItem.Text = "Cancella coda + upload";
+            this.cancellaCodaUploadToolStripMenuItem.Click += new System.EventHandler(this.cancellaCodaUploadToolStripMenuItem_Click);
             // 
             // lista
             // 
@@ -184,6 +211,7 @@
             this.Load += new System.EventHandler(this.UploadList_Load);
             this.tabControl1.ResumeLayout(false);
             this.inupload.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.lista.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -204,5 +232,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancellaListaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaListaFilesToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadToolStripMenuItem;
     }
 }

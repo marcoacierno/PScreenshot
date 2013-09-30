@@ -66,7 +66,6 @@ namespace Picu3
         /// Contiene tutti gli uploads da eseguire
         /// </summary>
         private Queue<UploadInfo> queue = new Queue<UploadInfo>();
-
         /// <summary>
         /// Costruttore, associo i delegate al WebClient per gestire le fasi dell'upload. Non richiede parametri
         /// </summary>
@@ -94,6 +93,13 @@ namespace Picu3
         /// <param name="e"></param>
         void wc_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
         {
+            //Salta ogni controllo etc, riesegue l'uploader
+            if (e.Cancelled)
+            {
+                RunUploader();
+                return;
+            }
+
             try
             {
                 Uri isOk;
@@ -185,6 +191,39 @@ namespace Picu3
                 uploadlist.UpdateResultStatus(working_UI.listViewID, "In upload..");
                 wc.UploadFileAsync(url, working_UI.fileUrl);
             }).Start();
+        }
+
+        /// <summary>
+        /// Si occupa di cancellare tutta la coda upload ma non cancella l'upload in corso
+        /// </summary>
+        /// <param name="inUpload">Se true il metodo deve cancellare anche l'upload in corso</param>
+        public void ClearQueue(bool inUpload = false)
+        {
+            // Se ci sono elementi nella queue, la pulisce
+            if (queue.Count > 0)
+            {
+                // Non credo che il multi thread sia un problema
+                // RunUploader non viene eseguito su un thread diverso
+                // wc_UploadFileCompleted dovrebbe tornare sull'UI thread
+
+                foreach (UploadInfo info in queue)
+                {
+                    uploadlist.DeleteItem(info.listViewID);
+                }
+
+                queue.Clear();
+            }
+
+            //Controllo se l'utente vuole cancellare anche l'upload in corso; 
+            if(inUpload)
+            {
+                // Vedo se il worker sta effettivamente lavorando
+                if (inWorking)
+                {
+                    uploadlist.DeleteItem(working_UI.listViewID);
+                    wc.CancelAsync();
+                }
+            }
         }
     }
 }

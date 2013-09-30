@@ -97,6 +97,15 @@ namespace Picu3
         {
             item.ListView.Invoke(new DelegateView(() => { item.ToolTipText = tooltiptext; }));
         }
+        /// <summary>
+        /// Questo metodo si occupa di eliminare l'item specificato dalla listview
+        /// </summary>
+        /// <param name="item">L'item da distruggere</param>
+        public void DeleteItem(ListViewItem item)
+        {
+            if(item != null)
+                item.ListView.Items.Remove(item);
+        }
         #endregion
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -193,6 +202,16 @@ namespace Picu3
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cancellaCodaUploadsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.upload.ClearQueue();
+        }
+
+        private void cancellaCodaUploadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.upload.ClearQueue(true);
         }
     }
 }
