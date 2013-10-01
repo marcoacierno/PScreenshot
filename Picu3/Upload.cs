@@ -152,7 +152,9 @@ namespace Picu3
             if (fileName == null)
                 fileName = Path.GetFileNameWithoutExtension(fileUrl);
 
-            queue.Enqueue(new UploadInfo(fileName, fileUrl, uploadlist.AddElementToList(fileName, "In attesa...", 0, 0)));
+            ListViewItem item = uploadlist.AddElementToList(fileName, "In attesa...", 0, 0);
+            queue.Enqueue(new UploadInfo(fileName, fileUrl, item));
+            uploadlist.UpdateToolTipText(item, fileUrl);
 
             PrepareUploader();
         }
@@ -182,7 +184,7 @@ namespace Picu3
 
             // Estrae le informazioni
             working_UI = queue.Dequeue();
-            uploadlist.UpdateToolTipText(working_UI.listViewID, "ND");
+            uploadlist.UpdateToolTipText(working_UI.listViewID, working_UI.fileUrl);
 
             // In se per se UploadFileASync già crea un suo thread, ma avvio il thread in un altro thread per evitare che l'applicazioni si blocchi quando WebClient
             // prova a stabilire una connessione con il server

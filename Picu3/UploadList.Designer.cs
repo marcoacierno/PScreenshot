@@ -39,21 +39,22 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.header_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.header_result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextUpload = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancellaCodaUploadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaCodaUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lista = new System.Windows.Forms.TabPage();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anteprimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
+            this.contextUpload.SuspendLayout();
             this.lista.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            this.contextList.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,7 +84,7 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.header_name,
             this.header_result});
-            this.listView1.ContextMenuStrip = this.contextMenuStrip2;
+            this.listView1.ContextMenuStrip = this.contextUpload;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup1.Header = "In Upload";
             listViewGroup1.Name = "in_upload";
@@ -114,13 +115,15 @@
             this.header_result.Text = "Risultato";
             this.header_result.Width = 148;
             // 
-            // contextMenuStrip2
+            // contextUpload
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextUpload.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.anteprimaToolStripMenuItem,
             this.cancellaCodaUploadsToolStripMenuItem,
             this.cancellaCodaUploadToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(200, 70);
+            this.contextUpload.Name = "contextMenuStrip2";
+            this.contextUpload.Size = new System.Drawing.Size(200, 92);
+            this.contextUpload.Opening += new System.ComponentModel.CancelEventHandler(this.contextUpload_Opening);
             // 
             // cancellaCodaUploadsToolStripMenuItem
             // 
@@ -151,7 +154,7 @@
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.listView2.ContextMenuStrip = this.contextMenuStrip1;
+            this.listView2.ContextMenuStrip = this.contextList;
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup4.Header = "OK";
             listViewGroup4.Name = "Terminati con successo";
@@ -177,13 +180,13 @@
             this.columnHeader2.Text = "Risultato";
             this.columnHeader2.Width = 145;
             // 
-            // contextMenuStrip1
+            // contextList
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cancellaListaToolStripMenuItem,
             this.cancellaListaFilesToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 48);
+            this.contextList.Name = "contextMenuStrip1";
+            this.contextList.Size = new System.Drawing.Size(179, 48);
             // 
             // cancellaListaToolStripMenuItem
             // 
@@ -199,6 +202,13 @@
             this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
             this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
             // 
+            // anteprimaToolStripMenuItem
+            // 
+            this.anteprimaToolStripMenuItem.Name = "anteprimaToolStripMenuItem";
+            this.anteprimaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.anteprimaToolStripMenuItem.Text = "Anteprima / Apri";
+            this.anteprimaToolStripMenuItem.Click += new System.EventHandler(this.anteprimaToolStripMenuItem_Click);
+            // 
             // UploadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,9 +221,9 @@
             this.Load += new System.EventHandler(this.UploadList_Load);
             this.tabControl1.ResumeLayout(false);
             this.inupload.ResumeLayout(false);
-            this.contextMenuStrip2.ResumeLayout(false);
+            this.contextUpload.ResumeLayout(false);
             this.lista.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -229,11 +239,12 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextList;
         private System.Windows.Forms.ToolStripMenuItem cancellaListaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaListaFilesToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ContextMenuStrip contextUpload;
         private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anteprimaToolStripMenuItem;
     }
 }

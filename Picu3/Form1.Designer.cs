@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.captureall = new System.Windows.Forms.RadioButton();
             this.captureactwindow = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.scegliFile = new System.Windows.Forms.OpenFileDialog();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.impostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uploadListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scegliFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chiudiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // captureall
@@ -95,6 +104,53 @@
             this.scegliFile.Multiselect = true;
             this.scegliFile.FileOk += new System.ComponentModel.CancelEventHandler(this.scegliFile_FileOk);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Picu3 - Clicca per aprire";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uploadListToolStripMenuItem,
+            this.scegliFilesToolStripMenuItem,
+            this.impostazioniToolStripMenuItem,
+            this.chiudiToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 92);
+            // 
+            // impostazioniToolStripMenuItem
+            // 
+            this.impostazioniToolStripMenuItem.Name = "impostazioniToolStripMenuItem";
+            this.impostazioniToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.impostazioniToolStripMenuItem.Text = "Impostazioni";
+            this.impostazioniToolStripMenuItem.Click += new System.EventHandler(this.impostazioniToolStripMenuItem_Click);
+            // 
+            // uploadListToolStripMenuItem
+            // 
+            this.uploadListToolStripMenuItem.Name = "uploadListToolStripMenuItem";
+            this.uploadListToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.uploadListToolStripMenuItem.Text = "Upload list";
+            this.uploadListToolStripMenuItem.Click += new System.EventHandler(this.uploadListToolStripMenuItem_Click);
+            // 
+            // scegliFilesToolStripMenuItem
+            // 
+            this.scegliFilesToolStripMenuItem.Name = "scegliFilesToolStripMenuItem";
+            this.scegliFilesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scegliFilesToolStripMenuItem.Text = "Scegli files";
+            this.scegliFilesToolStripMenuItem.Click += new System.EventHandler(this.scegliFilesToolStripMenuItem_Click);
+            // 
+            // chiudiToolStripMenuItem
+            // 
+            this.chiudiToolStripMenuItem.Name = "chiudiToolStripMenuItem";
+            this.chiudiToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.chiudiToolStripMenuItem.Text = "Chiudi";
+            this.chiudiToolStripMenuItem.Click += new System.EventHandler(this.chiudiToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -112,6 +168,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +183,12 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.OpenFileDialog scegliFile;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem uploadListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scegliFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem impostazioniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chiudiToolStripMenuItem;
     }
 }
 

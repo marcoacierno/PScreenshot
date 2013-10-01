@@ -15,6 +15,7 @@ namespace Picu3
 {
     public partial class Form1 : Form
     {
+        #region Fields
         /// <summary>
         /// Versione del programma
         /// </summary>
@@ -37,6 +38,11 @@ namespace Picu3
         /// </summary>
         public static Settings settings;
         public Impostazioni impostazioni;
+        /// <summary>
+        /// Indica l'ultimo stato conosciuto della finestra
+        /// </summary>
+        private FormWindowState state = FormWindowState.Normal;
+        #endregion
 
         #region Esterni
         [DllImport("user32.dll")]
@@ -178,5 +184,49 @@ namespace Picu3
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         } 
         #endregion
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            FormWindowState ws = this.WindowState;
+            
+            if (state != ws)
+            {
+                state = ws;
+
+                if (ws == FormWindowState.Minimized)
+                {
+                    this.ShowInTaskbar = false;
+                }
+            }
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                this.ShowInTaskbar = true;
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void uploadListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            uploadlist.Show();
+        }
+
+        private void scegliFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            scegliFile.ShowDialog();
+        }
+
+        private void impostazioniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            impostazioni.Show();
+        }
+
+        private void chiudiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

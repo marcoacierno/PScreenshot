@@ -213,5 +213,15 @@ namespace Picu3
         {
             Form1.upload.ClearQueue(true);
         }
+
+        private void anteprimaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(listView1.SelectedItems[0].ToolTipText);
+        }
+
+        private void contextUpload_Opening(object sender, CancelEventArgs e)
+        {
+            anteprimaToolStripMenuItem.Enabled = (listView1.SelectedItems.Count > 0);
+        }
     }
 }
