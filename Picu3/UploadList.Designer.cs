@@ -48,11 +48,13 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anteprimaApriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiaURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiaURLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.contextUpload.SuspendLayout();
@@ -92,7 +94,7 @@
             listViewGroup1.Header = "In Upload";
             listViewGroup1.Name = "in_upload";
             listViewGroup2.Header = "OK";
-            listViewGroup2.Name = "Terminati con successo";
+            listViewGroup2.Name = "terminatiok";
             listViewGroup3.Header = "Errore";
             listViewGroup3.Name = "Errore";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
@@ -122,10 +124,12 @@
             // 
             this.contextUpload.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.anteprimaToolStripMenuItem,
+            this.copiaURLToolStripMenuItem1,
+            this.toolStripSeparator2,
             this.cancellaCodaUploadsToolStripMenuItem,
             this.cancellaCodaUploadToolStripMenuItem});
             this.contextUpload.Name = "contextMenuStrip2";
-            this.contextUpload.Size = new System.Drawing.Size(200, 70);
+            this.contextUpload.Size = new System.Drawing.Size(200, 98);
             this.contextUpload.Opening += new System.ComponentModel.CancelEventHandler(this.contextUpload_Opening);
             // 
             // anteprimaToolStripMenuItem
@@ -202,20 +206,6 @@
             this.contextList.Size = new System.Drawing.Size(179, 120);
             this.contextList.Opening += new System.ComponentModel.CancelEventHandler(this.contextList_Opening);
             // 
-            // cancellaListaToolStripMenuItem
-            // 
-            this.cancellaListaToolStripMenuItem.Name = "cancellaListaToolStripMenuItem";
-            this.cancellaListaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.cancellaListaToolStripMenuItem.Text = "Cancella lista";
-            this.cancellaListaToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaToolStripMenuItem_Click);
-            // 
-            // cancellaListaFilesToolStripMenuItem
-            // 
-            this.cancellaListaFilesToolStripMenuItem.Name = "cancellaListaFilesToolStripMenuItem";
-            this.cancellaListaFilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
-            this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
-            // 
             // anteprimaApriToolStripMenuItem
             // 
             this.anteprimaApriToolStripMenuItem.Name = "anteprimaApriToolStripMenuItem";
@@ -234,6 +224,32 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
+            // 
+            // cancellaListaToolStripMenuItem
+            // 
+            this.cancellaListaToolStripMenuItem.Name = "cancellaListaToolStripMenuItem";
+            this.cancellaListaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.cancellaListaToolStripMenuItem.Text = "Cancella lista";
+            this.cancellaListaToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaToolStripMenuItem_Click);
+            // 
+            // cancellaListaFilesToolStripMenuItem
+            // 
+            this.cancellaListaFilesToolStripMenuItem.Name = "cancellaListaFilesToolStripMenuItem";
+            this.cancellaListaFilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
+            this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
+            // 
+            // copiaURLToolStripMenuItem1
+            // 
+            this.copiaURLToolStripMenuItem1.Name = "copiaURLToolStripMenuItem1";
+            this.copiaURLToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
+            this.copiaURLToolStripMenuItem1.Text = "Copia URL";
+            this.copiaURLToolStripMenuItem1.Click += new System.EventHandler(this.copiaURLToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
             // UploadList
             // 
@@ -275,5 +291,7 @@
         private System.Windows.Forms.ToolStripMenuItem anteprimaApriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copiaURLToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem copiaURLToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

@@ -72,7 +72,7 @@ namespace Picu3
         {
             Utils.ClearList(true);
             pesogalleria.Text = "0 MB";
-            MessageBox.Show("Galleria pulita");
+            Form1.notify.SendMessage("Impostazioni", "Galleria pulita", ToolTipIcon.Info, null);
         }
     }
 }

@@ -7,8 +7,18 @@ namespace Picu3
 {
     public class Notify
     {
+        /// <summary>
+        /// Icona che la classe deve gestire, passata nel costruttore
+        /// </summary>
         private NotifyIcon icon;
+        /// <summary>
+        /// Durata default (o ultima) del ballontip
+        /// </summary>
         private int durata;
+        /// <summary>
+        /// Evento da chiamare se l'icona viene premuta
+        /// Viene gestito quando viene richiamato SendMessage
+        /// </summary>
         private EventHandler clickHandle;
 
         /// <summary>
@@ -26,7 +36,14 @@ namespace Picu3
         {
             clickHandle(sender, e);
         }
-
+        /// <summary>
+        /// Si occupa di mostrare il ballontip
+        /// </summary>
+        /// <param name="title">Titolo da usare</param>
+        /// <param name="text">Testo da usare</param>
+        /// <param name="icona">Icona da usare</param>
+        /// <param name="durata">La durata del ballontip</param>
+        /// <param name="method">Il metodo da richiamare se l'utente clicca sul ballontip</param>
         public void SendMessage(string title, string text, ToolTipIcon icona, int durata, EventHandler method)
         {
             icon.BalloonTipText = text;
@@ -37,7 +54,13 @@ namespace Picu3
 
             icon.ShowBalloonTip(durata);
         }
-
+        /// <summary>
+        /// Si occupa di mostrare il ballontip
+        /// </summary>
+        /// <param name="title">Titolo da usare</param>
+        /// <param name="text">Testo da usare</param>
+        /// <param name="icona">Icona da usare</param>
+        /// <param name="method">Il metodo da richiamare se l'utente clicca sul ballontip</param>
         public void SendMessage(string title, string text, ToolTipIcon icona, EventHandler method)
         {
             icon.BalloonTipText = text;
@@ -49,14 +72,20 @@ namespace Picu3
             icon.ShowBalloonTip(1000);
         }
 
-
+        /// <summary>
+        /// Esegue solamente ShowBalloonTip senza modificare ne titolo ne testo
+        /// </summary>
         public void ReShowLast()
         {
             icon.ShowBalloonTip(durata);
         }
-
+        /// <summary>
+        /// Esegue solamente ShowBalloonTip senza modificare ne titolo ne testo specifica anche la durata.
+        /// </summary>
+        /// <param name="durata">La durata del ballontip</param>
         public void ReShowLast(int durata)
         {
+            this.durata = durata;
             icon.ShowBalloonTip(durata);
         }
     }
