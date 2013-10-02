@@ -90,7 +90,7 @@ namespace Picu3
 
             impostazioni = new Impostazioni();
 
-            if (!File.Exists(Environment.SpecialFolder.MyDocuments + "Picu\\version.txt"))
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "Picu\\version.txt"))
             {
                 using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\version.txt"))
                 {

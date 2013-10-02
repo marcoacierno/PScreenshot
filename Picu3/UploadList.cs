@@ -232,6 +232,7 @@ namespace Picu3
         private void copiaURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(listView2.SelectedItems[0].ToolTipText);
+            
         }
 
         private void contextList_Opening(object sender, CancelEventArgs e)
