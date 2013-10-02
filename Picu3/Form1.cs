@@ -45,6 +45,7 @@ namespace Picu3
         /// Indica l'ultimo stato conosciuto della finestra
         /// </summary>
         private FormWindowState state = FormWindowState.Normal;
+        public static Notify notify;
         #endregion
 
         #region Esterni
@@ -97,6 +98,8 @@ namespace Picu3
                     sw.WriteLine(version);
                 }
             }
+
+            notify = new Notify(this.notifyIcon1);
         }
 
         /// <summary>

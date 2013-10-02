@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -113,6 +114,8 @@ namespace Picu3
                     uploadlist.UpdateToolTipText(working_UI.listViewID, result);
 
                     DoScreen.UpdateScreenList(working_UI.fileName, result, false);
+
+                    Form1.notify.SendMessage("Upload OK", "L'Upload di " + working_UI.fileName + " è terminato.", ToolTipIcon.Info, (ee, s) => { Process.Start(result); });
                 }
                 else
                 {
@@ -121,6 +124,8 @@ namespace Picu3
                     uploadlist.UpdateResultStatus(working_UI.listViewID, result);
 
                     DoScreen.UpdateScreenList(working_UI.fileName, result, true);
+
+                    Form1.notify.SendMessage("Errore upload", "L'upload di " + working_UI.fileName + " è fallito.", ToolTipIcon.Error, null);
 
                     Logs.Log("L'upload del file è fallito. Errore: " + result);
                 }
