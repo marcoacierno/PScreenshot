@@ -11,6 +11,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
+//Nella vita non c'è niente di cosi terrificante e allo stesso tempo esaltate che prendere l'iniziativa.. quando si rischia tutto e ci si butta
+
+
 namespace Picu3
 {
     public partial class Form1 : Form
@@ -19,7 +22,7 @@ namespace Picu3
         /// <summary>
         /// Versione del programma
         /// </summary>
-        private const string version = "3.0.1"; 
+        private const string version = "3.0.5"; 
 
         /// <summary>
         /// Si riferisce al form che contiene l'upload list
@@ -86,6 +89,14 @@ namespace Picu3
                 this.Icon = new Icon("icon.ico", 128, 128);
 
             impostazioni = new Impostazioni();
+
+            if (!File.Exists(Environment.SpecialFolder.MyDocuments + "Picu\\version.txt"))
+            {
+                using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\version.txt"))
+                {
+                    sw.WriteLine(version);
+                }
+            }
         }
 
         /// <summary>
@@ -204,8 +215,16 @@ namespace Picu3
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                this.ShowInTaskbar = true;
-                this.WindowState = FormWindowState.Normal;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    //this.ShowInTaskbar = false;
+                    this.WindowState = FormWindowState.Minimized;
+                }
+                else
+                {
+                    this.ShowInTaskbar = true;
+                    this.WindowState = FormWindowState.Normal;
+                }
             }
         }
 

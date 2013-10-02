@@ -223,5 +223,21 @@ namespace Picu3
         {
             anteprimaToolStripMenuItem.Enabled = (listView1.SelectedItems.Count > 0);
         }
+
+        private void anteprimaApriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(listView2.SelectedItems[0].ToolTipText);
+        }
+
+        private void copiaURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(listView2.SelectedItems[0].ToolTipText);
+        }
+
+        private void contextList_Opening(object sender, CancelEventArgs e)
+        {
+            copiaURLToolStripMenuItem.Enabled = (listView2.SelectedItems.Count > 0);
+            anteprimaApriToolStripMenuItem.Enabled = (listView2.SelectedItems.Count > 0);
+        }
     }
 }

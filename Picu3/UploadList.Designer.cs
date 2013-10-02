@@ -40,6 +40,7 @@
             this.header_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.header_result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextUpload = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.anteprimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaCodaUploadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaCodaUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lista = new System.Windows.Forms.TabPage();
@@ -49,7 +50,9 @@
             this.contextList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.anteprimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anteprimaApriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiaURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.contextUpload.SuspendLayout();
@@ -122,8 +125,15 @@
             this.cancellaCodaUploadsToolStripMenuItem,
             this.cancellaCodaUploadToolStripMenuItem});
             this.contextUpload.Name = "contextMenuStrip2";
-            this.contextUpload.Size = new System.Drawing.Size(200, 92);
+            this.contextUpload.Size = new System.Drawing.Size(200, 70);
             this.contextUpload.Opening += new System.ComponentModel.CancelEventHandler(this.contextUpload_Opening);
+            // 
+            // anteprimaToolStripMenuItem
+            // 
+            this.anteprimaToolStripMenuItem.Name = "anteprimaToolStripMenuItem";
+            this.anteprimaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.anteprimaToolStripMenuItem.Text = "Anteprima / Apri";
+            this.anteprimaToolStripMenuItem.Click += new System.EventHandler(this.anteprimaToolStripMenuItem_Click);
             // 
             // cancellaCodaUploadsToolStripMenuItem
             // 
@@ -183,10 +193,14 @@
             // contextList
             // 
             this.contextList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.anteprimaApriToolStripMenuItem,
+            this.copiaURLToolStripMenuItem,
+            this.toolStripSeparator1,
             this.cancellaListaToolStripMenuItem,
             this.cancellaListaFilesToolStripMenuItem});
             this.contextList.Name = "contextMenuStrip1";
-            this.contextList.Size = new System.Drawing.Size(179, 48);
+            this.contextList.Size = new System.Drawing.Size(179, 120);
+            this.contextList.Opening += new System.ComponentModel.CancelEventHandler(this.contextList_Opening);
             // 
             // cancellaListaToolStripMenuItem
             // 
@@ -202,12 +216,24 @@
             this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
             this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
             // 
-            // anteprimaToolStripMenuItem
+            // anteprimaApriToolStripMenuItem
             // 
-            this.anteprimaToolStripMenuItem.Name = "anteprimaToolStripMenuItem";
-            this.anteprimaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.anteprimaToolStripMenuItem.Text = "Anteprima / Apri";
-            this.anteprimaToolStripMenuItem.Click += new System.EventHandler(this.anteprimaToolStripMenuItem_Click);
+            this.anteprimaApriToolStripMenuItem.Name = "anteprimaApriToolStripMenuItem";
+            this.anteprimaApriToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.anteprimaApriToolStripMenuItem.Text = "Apri";
+            this.anteprimaApriToolStripMenuItem.Click += new System.EventHandler(this.anteprimaApriToolStripMenuItem_Click);
+            // 
+            // copiaURLToolStripMenuItem
+            // 
+            this.copiaURLToolStripMenuItem.Name = "copiaURLToolStripMenuItem";
+            this.copiaURLToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.copiaURLToolStripMenuItem.Text = "Copia URL";
+            this.copiaURLToolStripMenuItem.Click += new System.EventHandler(this.copiaURLToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
             // 
             // UploadList
             // 
@@ -246,5 +272,8 @@
         private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaCodaUploadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anteprimaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anteprimaApriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copiaURLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
