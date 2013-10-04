@@ -78,7 +78,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(285, 64);
+            this.button1.Location = new System.Drawing.Point(204, 59);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(204, 64);
+            this.button2.Location = new System.Drawing.Point(289, 59);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -98,7 +98,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 64);
+            this.button3.Location = new System.Drawing.Point(12, 59);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 23);
             this.button3.TabIndex = 6;
@@ -109,7 +109,7 @@
             // pesogalleria
             // 
             this.pesogalleria.AutoSize = true;
-            this.pesogalleria.Location = new System.Drawing.Point(118, 69);
+            this.pesogalleria.Location = new System.Drawing.Point(118, 64);
             this.pesogalleria.Name = "pesogalleria";
             this.pesogalleria.Size = new System.Drawing.Size(30, 13);
             this.pesogalleria.TabIndex = 7;
@@ -119,7 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 94);
+            this.ClientSize = new System.Drawing.Size(372, 92);
             this.Controls.Add(this.pesogalleria);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -130,6 +130,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Impostazioni";
             this.Text = "Impostazioni";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Impostazioni_FormClosing);
             this.Load += new System.EventHandler(this.Impostazioni_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

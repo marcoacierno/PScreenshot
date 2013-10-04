@@ -48,6 +48,7 @@ namespace Picu3
     /// </summary>
     public class Upload
     {
+        #region Fields
         public static Uri url = new Uri(@"http://picu.site11.com/share_app.php");
 
         private WebClient wc = new WebClient();
@@ -66,7 +67,9 @@ namespace Picu3
         /// <summary>
         /// Contiene tutti gli uploads da eseguire
         /// </summary>
-        private Queue<UploadInfo> queue = new Queue<UploadInfo>();
+        private Queue<UploadInfo> queue = new Queue<UploadInfo>(); 
+        #endregion
+
         /// <summary>
         /// Costruttore, associo i delegate al WebClient per gestire le fasi dell'upload. Non richiede parametri
         /// </summary>
@@ -116,6 +119,7 @@ namespace Picu3
                     DoScreen.UpdateScreenList(working_UI.fileName, result, false);
 
                     Form1.notify.SendMessage("Upload OK", "L'Upload di " + working_UI.fileName + " è terminato.", ToolTipIcon.Info, (ee, s) => { Process.Start(result); });
+                    Form1.notify.SetIconText();
                 }
                 else
                 {
@@ -126,6 +130,7 @@ namespace Picu3
                     DoScreen.UpdateScreenList(working_UI.fileName, result, true);
 
                     Form1.notify.SendMessage("Errore upload", "L'upload di " + working_UI.fileName + " è fallito.", ToolTipIcon.Error, null);
+                    Form1.notify.SetIconText();
 
                     Logs.Log("L'upload del file è fallito. Errore: " + result);
                 }
@@ -191,6 +196,7 @@ namespace Picu3
             working_UI = queue.Dequeue();
             uploadlist.UpdateToolTipText(working_UI.listViewID, working_UI.fileUrl);
 
+            Form1.notify.SetIconText("L'Upload di " + working_UI.fileName + " è iniziato. Clicca per aprire.");
             // In se per se UploadFileASync già crea un suo thread, ma avvio il thread in un altro thread per evitare che l'applicazioni si blocchi quando WebClient
             // prova a stabilire una connessione con il server
             new Thread(() =>
@@ -231,6 +237,8 @@ namespace Picu3
                     wc.CancelAsync();
                 }
             }
+
+            Form1.notify.SetIconText();
         }
     }
 }

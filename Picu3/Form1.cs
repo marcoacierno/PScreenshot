@@ -23,7 +23,6 @@ namespace Picu3
         /// Versione del programma
         /// </summary>
         private const string version = "3.0.5"; 
-
         /// <summary>
         /// Si riferisce al form che contiene l'upload list
         /// </summary>
@@ -40,11 +39,17 @@ namespace Picu3
         /// Settings del programma
         /// </summary>
         public static Settings settings;
+        /// <summary>
+        /// Scheda impostazioni
+        /// </summary>
         public Impostazioni impostazioni;
         /// <summary>
         /// Indica l'ultimo stato conosciuto della finestra
         /// </summary>
         private FormWindowState state = FormWindowState.Normal;
+        /// <summary>
+        /// Offre un modo unico per accedere alla icontray dell'applicazione
+        /// </summary>
         public static Notify notify;
         #endregion
 
@@ -125,6 +130,7 @@ namespace Picu3
             {
                 captureactwindow.Checked = true;
             }
+
         }
 
         #region Scegli file region
@@ -179,6 +185,8 @@ namespace Picu3
                     e.Cancel = true;
                 }
             }
+
+            //notifyIcon1.Dispose();
         }
 
         #region File drop

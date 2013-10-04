@@ -34,10 +34,9 @@ namespace Picu3
             Hide();
         }
         
-
         private void UploadList_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         /// <summary>

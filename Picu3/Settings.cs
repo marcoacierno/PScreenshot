@@ -38,6 +38,8 @@ namespace Picu3
             }
         }
 
+        public string GalleryPath;
+
         private string _GalleryDir;
         public string GalleryDir
         {
@@ -52,7 +54,16 @@ namespace Picu3
         }
         public static string _ImagesList = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\images.txt";
 
-        public string GalleryPath;
+        //private bool _OpenPicuForm;
+        //public bool OpenPicuForm
+        //{
+        //    get { return _OpenPicuForm; }
+        //    set
+        //    {
+        //        _OpenPicuForm = value;
+        //        SaveConfig();
+        //    }
+        //}
 
         #region Save and Load
         /// <summary>
@@ -64,6 +75,7 @@ namespace Picu3
             _Formato = ImageFormat.Png;
             _GalleryDir = "Galleria";
             GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\Galleria";
+            //_OpenPicuForm = true;
 
             SaveConfig();
         }
@@ -104,6 +116,12 @@ namespace Picu3
                                 _GalleryDir = reader.Value;
                                 GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\" + _GalleryDir;
                                 break;
+                            //case "picuform":
+                            //    if (readed) { readed = false; continue; }
+                            //    reader.Read();
+                            //    readed = true;
+                            //    _OpenPicuForm = Convert.ToBoolean(reader.Value);
+                            //    break;
                         }
                     }
                 }
@@ -140,6 +158,8 @@ namespace Picu3
                     writer.WriteElementString("formato", Utils.StringFromImageFormat(_Formato));
 
                     writer.WriteElementString("gallery", _GalleryDir);
+
+                    //writer.WriteElementString("picuform", _OpenPicuForm.ToString());
 
                     writer.WriteEndElement();
 

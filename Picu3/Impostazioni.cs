@@ -29,6 +29,7 @@ namespace Picu3
                 MessageBox.Show("Impossibile trovare settings.ico");
             else
                 this.Icon = new Icon("settings.ico", 128, 128);
+
         }
 
         private void Impostazioni_Load(object sender, EventArgs e)
@@ -41,9 +42,9 @@ namespace Picu3
         /// Questo metodo si occupa di calcolare lo spazio occupato da tutti i files della galleria
         /// </summary>
         /// <returns>Ritorna il peso in bytes</returns>
-        private double pesoGalleria()
+        private long pesoGalleria()
         {
-            if (!Directory.Exists(Form1.settings.GalleryPath)) return 0.0;
+            if (!Directory.Exists(Form1.settings.GalleryPath)) return 0L;
             long peso = 0;
 
             foreach (string file in Directory.GetFiles(Form1.settings.GalleryPath))
@@ -60,12 +61,12 @@ namespace Picu3
             Form1.settings.GalleryDir = textBox1.Text;
             Form1.settings.SaveConfig();
 
-            this.Dispose();
+            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -73,6 +74,12 @@ namespace Picu3
             Utils.ClearList(true);
             pesogalleria.Text = "0 MB";
             Form1.notify.SendMessage("Impostazioni", "Galleria pulita", ToolTipIcon.Info, null);
+        }
+
+        private void Impostazioni_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
         }
     }
 }

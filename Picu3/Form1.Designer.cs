@@ -42,6 +42,8 @@
             this.scegliFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.impostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chiudiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,38 +119,50 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uploadListToolStripMenuItem,
             this.scegliFilesToolStripMenuItem,
+            this.toolStripSeparator2,
             this.impostazioniToolStripMenuItem,
+            this.toolStripSeparator1,
             this.chiudiToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 126);
             // 
             // uploadListToolStripMenuItem
             // 
             this.uploadListToolStripMenuItem.Name = "uploadListToolStripMenuItem";
-            this.uploadListToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.uploadListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.uploadListToolStripMenuItem.Text = "Upload list";
             this.uploadListToolStripMenuItem.Click += new System.EventHandler(this.uploadListToolStripMenuItem_Click);
             // 
             // scegliFilesToolStripMenuItem
             // 
             this.scegliFilesToolStripMenuItem.Name = "scegliFilesToolStripMenuItem";
-            this.scegliFilesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scegliFilesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scegliFilesToolStripMenuItem.Text = "Scegli files";
             this.scegliFilesToolStripMenuItem.Click += new System.EventHandler(this.scegliFilesToolStripMenuItem_Click);
             // 
             // impostazioniToolStripMenuItem
             // 
             this.impostazioniToolStripMenuItem.Name = "impostazioniToolStripMenuItem";
-            this.impostazioniToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.impostazioniToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.impostazioniToolStripMenuItem.Text = "Impostazioni";
             this.impostazioniToolStripMenuItem.Click += new System.EventHandler(this.impostazioniToolStripMenuItem_Click);
             // 
             // chiudiToolStripMenuItem
             // 
             this.chiudiToolStripMenuItem.Name = "chiudiToolStripMenuItem";
-            this.chiudiToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.chiudiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.chiudiToolStripMenuItem.Text = "Chiudi";
             this.chiudiToolStripMenuItem.Click += new System.EventHandler(this.chiudiToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // Form1
             // 
@@ -188,6 +202,8 @@
         private System.Windows.Forms.ToolStripMenuItem scegliFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem impostazioniToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chiudiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

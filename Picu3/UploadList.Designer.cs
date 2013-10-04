@@ -41,6 +41,8 @@
             this.header_result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextUpload = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.anteprimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiaURLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cancellaCodaUploadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaCodaUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lista = new System.Windows.Forms.TabPage();
@@ -53,8 +55,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiaURLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.contextUpload.SuspendLayout();
@@ -102,6 +102,7 @@
             listViewGroup2,
             listViewGroup3});
             this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(352, 409);
             this.listView1.TabIndex = 0;
@@ -138,6 +139,18 @@
             this.anteprimaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.anteprimaToolStripMenuItem.Text = "Anteprima / Apri";
             this.anteprimaToolStripMenuItem.Click += new System.EventHandler(this.anteprimaToolStripMenuItem_Click);
+            // 
+            // copiaURLToolStripMenuItem1
+            // 
+            this.copiaURLToolStripMenuItem1.Name = "copiaURLToolStripMenuItem1";
+            this.copiaURLToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
+            this.copiaURLToolStripMenuItem1.Text = "Copia URL";
+            this.copiaURLToolStripMenuItem1.Click += new System.EventHandler(this.copiaURLToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
             // cancellaCodaUploadsToolStripMenuItem
             // 
@@ -178,6 +191,7 @@
             listViewGroup4,
             listViewGroup5});
             this.listView2.Location = new System.Drawing.Point(0, 0);
+            this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(352, 409);
             this.listView2.TabIndex = 1;
@@ -203,7 +217,7 @@
             this.cancellaListaToolStripMenuItem,
             this.cancellaListaFilesToolStripMenuItem});
             this.contextList.Name = "contextMenuStrip1";
-            this.contextList.Size = new System.Drawing.Size(179, 120);
+            this.contextList.Size = new System.Drawing.Size(179, 98);
             this.contextList.Opening += new System.ComponentModel.CancelEventHandler(this.contextList_Opening);
             // 
             // anteprimaApriToolStripMenuItem
@@ -238,18 +252,6 @@
             this.cancellaListaFilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
             this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
-            // 
-            // copiaURLToolStripMenuItem1
-            // 
-            this.copiaURLToolStripMenuItem1.Name = "copiaURLToolStripMenuItem1";
-            this.copiaURLToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
-            this.copiaURLToolStripMenuItem1.Text = "Copia URL";
-            this.copiaURLToolStripMenuItem1.Click += new System.EventHandler(this.copiaURLToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
             // UploadList
             // 
