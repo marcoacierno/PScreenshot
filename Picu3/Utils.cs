@@ -26,7 +26,7 @@ namespace Picu3
 
         public static string StringFromImageFormat(ImageFormat imageFormat)
         {
-            if (imageFormat == null) throw new Exception("Il valore default per il formato delle immagini non è stato assegnato.");
+            if (imageFormat == null) throw new ArgumentException("Il valore default per il formato delle immagini non è stato assegnato.");
 
             return ifExtensions[imageFormat];
         }

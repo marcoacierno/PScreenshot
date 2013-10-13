@@ -59,22 +59,6 @@ namespace Picu3
         }
 
         /// <summary>
-        /// Esegue solamente ShowBalloonTip senza modificare ne titolo ne testo
-        /// </summary>
-        //public void ReShowLast()
-        //{
-        //    icon.ShowBalloonTip(durata);
-        //}
-        ///// <summary>
-        ///// Esegue solamente ShowBalloonTip senza modificare ne titolo ne testo specifica anche la durata.
-        ///// </summary>
-        ///// <param name="durata">La durata del ballontip</param>
-        //public void ReShowLast(int durata)
-        //{
-        //    this.durata = durata;
-        //    icon.ShowBalloonTip(durata);
-        //}
-        /// <summary>
         /// Questo metodo si occupa di modificare il testo dell'icona
         /// </summary>
         /// <param name="text">Testo da applicare</param>

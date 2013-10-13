@@ -55,6 +55,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaTuttoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.contextUpload.SuspendLayout();
@@ -128,9 +129,10 @@
             this.copiaURLToolStripMenuItem1,
             this.toolStripSeparator2,
             this.cancellaCodaUploadsToolStripMenuItem,
-            this.cancellaCodaUploadToolStripMenuItem});
+            this.cancellaCodaUploadToolStripMenuItem,
+            this.cancellaTuttoToolStripMenuItem});
             this.contextUpload.Name = "contextMenuStrip2";
-            this.contextUpload.Size = new System.Drawing.Size(200, 98);
+            this.contextUpload.Size = new System.Drawing.Size(200, 142);
             this.contextUpload.Opening += new System.ComponentModel.CancelEventHandler(this.contextUpload_Opening);
             // 
             // anteprimaToolStripMenuItem
@@ -253,6 +255,13 @@
             this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
             this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
             // 
+            // cancellaTuttoToolStripMenuItem
+            // 
+            this.cancellaTuttoToolStripMenuItem.Name = "cancellaTuttoToolStripMenuItem";
+            this.cancellaTuttoToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cancellaTuttoToolStripMenuItem.Text = "Cancella tutto";
+            this.cancellaTuttoToolStripMenuItem.Click += new System.EventHandler(this.cancellaTuttoToolStripMenuItem_Click);
+            // 
             // UploadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +304,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem copiaURLToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem cancellaTuttoToolStripMenuItem;
     }
 }

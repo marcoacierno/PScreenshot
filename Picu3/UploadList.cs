@@ -260,5 +260,11 @@ namespace Picu3
         {
             Clipboard.SetText(listView1.SelectedItems[0].ToolTipText);
         }
+
+        private void cancellaTuttoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.upload.ClearQueue(true);
+            listView1.Items.Clear();
+        }
     }
 }
