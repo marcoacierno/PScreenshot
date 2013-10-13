@@ -47,7 +47,7 @@ namespace Picu3
         /// <param name="text">Testo da usare</param>
         /// <param name="icona">Icona da usare</param>
         /// <param name="method">Il metodo da richiamare se l'utente clicca sul ballontip</param>
-        public void SendMessage(string title, string text, ToolTipIcon icona, EventHandler method, bool clearHandleAfterCall = true)
+        public void SendMessage(string title, string text, EventHandler method, ToolTipIcon icona = ToolTipIcon.Info, int timeout = 1000, bool clearHandleAfterCall = true)
         {
             icon.BalloonTipText = text;
             icon.BalloonTipTitle = title;
@@ -55,7 +55,7 @@ namespace Picu3
             clickHandle = method;
             this.clearHandleAfterCall = clearHandleAfterCall;
 
-            icon.ShowBalloonTip(1000);
+            icon.ShowBalloonTip(timeout);
         }
 
         /// <summary>

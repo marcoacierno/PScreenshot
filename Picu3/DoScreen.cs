@@ -58,7 +58,7 @@ namespace Picu3
                     break;
             }
 
-            Form1.notify.SendMessage("Screen catturato", "Lo screen " + Path.GetFileNameWithoutExtension(url) + " e' stato salvato.", System.Windows.Forms.ToolTipIcon.Info, (ee, s) => { Process.Start(url); });
+            Form1.notify.SendMessage("Screen catturato", "Lo screen " + Path.GetFileNameWithoutExtension(url) + " e' stato salvato.", (ee, s) => { Process.Start(url); }, System.Windows.Forms.ToolTipIcon.Info);
             Form1.upload.AddUpload(url);
         }
 

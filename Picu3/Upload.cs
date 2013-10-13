@@ -118,7 +118,7 @@ namespace Picu3
 
                     DoScreen.UpdateScreenList(working_UI.fileName, result, false);
 
-                    Form1.notify.SendMessage("Upload OK", "L'Upload di " + working_UI.fileName + " è terminato.", ToolTipIcon.Info, (ee, s) => { Process.Start(result); });
+                    Form1.notify.SendMessage("Upload OK", "L'Upload di " + working_UI.fileName + " è terminato.", (ee, s) => { Process.Start(result); }, ToolTipIcon.Info);
                     Form1.notify.SetIconText();
                 }
                 else
@@ -129,7 +129,7 @@ namespace Picu3
 
                     DoScreen.UpdateScreenList(working_UI.fileName, result, true);
 
-                    Form1.notify.SendMessage("Errore upload", "L'upload di " + working_UI.fileName + " è fallito.", ToolTipIcon.Error, null);
+                    Form1.notify.SendMessage("Errore upload", "L'upload di " + working_UI.fileName + " è fallito.", null, ToolTipIcon.Error);
                     Form1.notify.SetIconText();
 
                     Logs.Log("L'upload del file è fallito. Errore: " + result);

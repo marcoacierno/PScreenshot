@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -36,6 +37,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.pesogalleria = new System.Windows.Forms.Label();
+            this.gestionegalleria = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancellaGalleriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionegalleria.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -102,7 +107,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 23);
             this.button3.TabIndex = 6;
-            this.button3.Text = "Cancella Galleria";
+            this.button3.Text = "Gestisci galleria";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -114,6 +119,28 @@
             this.pesogalleria.Size = new System.Drawing.Size(30, 13);
             this.pesogalleria.TabIndex = 7;
             this.pesogalleria.Text = "0 mb";
+            // 
+            // gestionegalleria
+            // 
+            this.gestionegalleria.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apriToolStripMenuItem,
+            this.cancellaGalleriaToolStripMenuItem});
+            this.gestionegalleria.Name = "gestionegalleria";
+            this.gestionegalleria.Size = new System.Drawing.Size(161, 70);
+            // 
+            // cancellaGalleriaToolStripMenuItem
+            // 
+            this.cancellaGalleriaToolStripMenuItem.Name = "cancellaGalleriaToolStripMenuItem";
+            this.cancellaGalleriaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancellaGalleriaToolStripMenuItem.Text = "Cancella galleria";
+            this.cancellaGalleriaToolStripMenuItem.Click += new System.EventHandler(this.cancellaGalleriaToolStripMenuItem_Click);
+            // 
+            // apriToolStripMenuItem
+            // 
+            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
+            this.apriToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.apriToolStripMenuItem.Text = "Apri";
+            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
             // 
             // Impostazioni
             // 
@@ -132,6 +159,7 @@
             this.Text = "Impostazioni";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Impostazioni_FormClosing);
             this.Load += new System.EventHandler(this.Impostazioni_Load);
+            this.gestionegalleria.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,5 +175,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label pesogalleria;
+        private System.Windows.Forms.ContextMenuStrip gestionegalleria;
+        private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaGalleriaToolStripMenuItem;
     }
 }

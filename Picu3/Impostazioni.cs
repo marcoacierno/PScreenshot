@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -71,15 +72,29 @@ namespace Picu3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Utils.ClearList(true);
-            pesogalleria.Text = "0 MB";
-            Form1.notify.SendMessage("Impostazioni", "Galleria pulita", ToolTipIcon.Info, null);
+            //Utils.ClearList(true);
+            //pesogalleria.Text = "0 MB";
+            //Form1.notify.SendMessage("Impostazioni", "Galleria pulita", null, ToolTipIcon.Info);
+
+            gestionegalleria.Show(Cursor.Position);
         }
 
         private void Impostazioni_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             Hide();
+        }
+
+        private void cancellaGalleriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.ClearList(true);
+            pesogalleria.Text = "0 MB";
+            Form1.notify.SendMessage("Impostazioni", "Galleria pulita", null, ToolTipIcon.Info);
+        }
+
+        private void apriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Form1.settings.GalleryPath);
         }
     }
 }
