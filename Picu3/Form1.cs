@@ -86,7 +86,7 @@ namespace Picu3
 
             settings.LoadConfig();
 
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             // 128 too big? use 18x18 mb?
             if (!System.IO.File.Exists("icon.ico"))

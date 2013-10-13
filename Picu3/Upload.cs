@@ -28,7 +28,6 @@ namespace Picu3
         /// Contiene l'ID assegnato all'upload
         /// </summary>
         public ListViewItem listViewID;
-
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -67,7 +66,11 @@ namespace Picu3
         /// <summary>
         /// Contiene tutti gli uploads da eseguire
         /// </summary>
-        private Queue<UploadInfo> queue = new Queue<UploadInfo>(); 
+        private Queue<UploadInfo> queue = new Queue<UploadInfo>();
+        /// <summary>
+        /// True se l'upload è stato cancellato con la forza
+        /// </summary>
+        private bool uploadAborted;
         #endregion
 
         /// <summary>
@@ -79,6 +82,7 @@ namespace Picu3
             wc.UploadProgressChanged += wc_UploadProgressChanged;
 
             inWorking = false;
+            uploadAborted = false;
         }
         /// <summary>
         /// Chaimato dall'uploader quando ci sono aggiornamenti nell'upload (per ottenere la percentuale)
@@ -87,6 +91,7 @@ namespace Picu3
         /// <param name="e"></param>
         void wc_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
+            if (!inWorking || uploadAborted) return;
             uploadlist.UpdateResultStatus(working_UI.listViewID, e.ProgressPercentage.ToString() + "%");
         }
 
@@ -177,6 +182,7 @@ namespace Picu3
             if (inWorking)
                 return;
 
+            uploadAborted = false;
             inWorking = true;
             RunUploader();
         }
@@ -189,6 +195,7 @@ namespace Picu3
             if (queue.Count < 1)
             {
                 inWorking = false;
+                uploadAborted = false;
                 return;
             }
 
@@ -233,6 +240,7 @@ namespace Picu3
                 // Vedo se il worker sta effettivamente lavorando
                 if (inWorking)
                 {
+                    uploadAborted = true;
                     uploadlist.DeleteItem(working_UI.listViewID);
                     wc.CancelAsync();
                 }
