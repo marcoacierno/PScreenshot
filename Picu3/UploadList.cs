@@ -237,7 +237,10 @@ namespace Picu3
 
         private void anteprimaApriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(listView2.SelectedItems[0].ToolTipText);
+            string anteprima = listView2.SelectedItems[0].ToolTipText;
+            if (anteprima == "ND" || anteprima == null) return;
+
+            Process.Start(anteprima);
         }
 
         private void copiaURLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -247,8 +250,26 @@ namespace Picu3
 
         private void contextList_Opening(object sender, CancelEventArgs e)
         {
-            copiaURLToolStripMenuItem.Enabled = (listView2.SelectedItems.Count > 0);
-            anteprimaApriToolStripMenuItem.Enabled = (listView2.SelectedItems.Count > 0);
+            if (listView2.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listView2.SelectedItems[0];
+
+                if (item.Group == listView2.Groups[1])
+                {
+                    copiaURLToolStripMenuItem.Enabled = false;
+                    anteprimaApriToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    copiaURLToolStripMenuItem.Enabled = true;
+                    anteprimaApriToolStripMenuItem.Enabled = true;
+                }
+            }
+            else
+            {
+                copiaURLToolStripMenuItem.Enabled = false;
+                anteprimaApriToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void copiaURLToolStripMenuItem1_Click(object sender, EventArgs e)

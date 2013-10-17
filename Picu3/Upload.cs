@@ -68,7 +68,7 @@ namespace Picu3
         /// </summary>
         private Queue<UploadInfo> queue = new Queue<UploadInfo>();
         /// <summary>
-        /// True se l'upload è stato cancellato con la forza
+        /// Indica se l'upload è stato cancellato con la forza da parte dell'utente
         /// </summary>
         private bool uploadAborted;
         #endregion
