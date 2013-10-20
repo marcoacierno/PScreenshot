@@ -45,6 +45,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cancellaCodaUploadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaCodaUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaTuttoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lista = new System.Windows.Forms.TabPage();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,7 +56,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cancellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancellaListaFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancellaTuttoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cancellaListaOKErroriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.inupload.SuspendLayout();
             this.contextUpload.SuspendLayout();
@@ -130,9 +132,11 @@
             this.toolStripSeparator2,
             this.cancellaCodaUploadsToolStripMenuItem,
             this.cancellaCodaUploadToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.cancellaListaOKErroriToolStripMenuItem,
             this.cancellaTuttoToolStripMenuItem});
             this.contextUpload.Name = "contextMenuStrip2";
-            this.contextUpload.Size = new System.Drawing.Size(200, 142);
+            this.contextUpload.Size = new System.Drawing.Size(200, 170);
             this.contextUpload.Opening += new System.ComponentModel.CancelEventHandler(this.contextUpload_Opening);
             // 
             // anteprimaToolStripMenuItem
@@ -167,6 +171,13 @@
             this.cancellaCodaUploadToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.cancellaCodaUploadToolStripMenuItem.Text = "Cancella coda + upload";
             this.cancellaCodaUploadToolStripMenuItem.Click += new System.EventHandler(this.cancellaCodaUploadToolStripMenuItem_Click);
+            // 
+            // cancellaTuttoToolStripMenuItem
+            // 
+            this.cancellaTuttoToolStripMenuItem.Name = "cancellaTuttoToolStripMenuItem";
+            this.cancellaTuttoToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cancellaTuttoToolStripMenuItem.Text = "Cancella tutto";
+            this.cancellaTuttoToolStripMenuItem.Click += new System.EventHandler(this.cancellaTuttoToolStripMenuItem_Click);
             // 
             // lista
             // 
@@ -255,12 +266,17 @@
             this.cancellaListaFilesToolStripMenuItem.Text = "Cancella lista + files";
             this.cancellaListaFilesToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaFilesToolStripMenuItem_Click);
             // 
-            // cancellaTuttoToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.cancellaTuttoToolStripMenuItem.Name = "cancellaTuttoToolStripMenuItem";
-            this.cancellaTuttoToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.cancellaTuttoToolStripMenuItem.Text = "Cancella tutto";
-            this.cancellaTuttoToolStripMenuItem.Click += new System.EventHandler(this.cancellaTuttoToolStripMenuItem_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            // 
+            // cancellaListaOKErroriToolStripMenuItem
+            // 
+            this.cancellaListaOKErroriToolStripMenuItem.Name = "cancellaListaOKErroriToolStripMenuItem";
+            this.cancellaListaOKErroriToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cancellaListaOKErroriToolStripMenuItem.Text = "Cancella lista OK/Errori";
+            this.cancellaListaOKErroriToolStripMenuItem.Click += new System.EventHandler(this.cancellaListaOKErroriToolStripMenuItem_Click);
             // 
             // UploadList
             // 
@@ -305,5 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem copiaURLToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem cancellaTuttoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cancellaListaOKErroriToolStripMenuItem;
     }
 }

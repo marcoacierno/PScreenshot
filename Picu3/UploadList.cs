@@ -282,5 +282,16 @@ namespace Picu3
             Form1.upload.ClearQueue(true);
             listView1.Items.Clear();
         }
+
+        private void cancellaListaOKErroriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in listView1.Items)
+            {
+                if (item.Group == listView1.Groups[1] || item.Group == listView1.Groups[2])
+                {
+                    listView1.Items.Remove(item);
+                }
+            }
+        }
     }
 }
