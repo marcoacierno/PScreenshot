@@ -39,19 +39,17 @@ namespace Picu3
                 ++idx;
             }
 
-            ScreenShot.ScreenCapture sc = null;
+            ScreenShot.ScreenCapture sc = new ScreenShot.ScreenCapture();
             Image img = null;
 
             switch (area)
             {
                 case SCREEN_AREA.CAPTURE_ALL:
-                    sc = new ScreenShot.ScreenCapture();
                     img = sc.CaptureScreen();
 
                     img.Save(url, format);
                     break;
                 case SCREEN_AREA.CAPTURE_ACT_WINDOW:
-                    sc = new ScreenShot.ScreenCapture();
                     img = sc.CaptureWindow(Form1.GetForegroundWindow());
 
                     img.Save(url, format);

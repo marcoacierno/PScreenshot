@@ -10,7 +10,13 @@ namespace Picu3
 {
     public enum SCREEN_AREA
     {
+        /// <summary>
+        /// Indica che deve catturare tutto lo schermo
+        /// </summary>
         CAPTURE_ALL,
+        /// <summary>
+        /// Indica che deve catturare solamente la finestra attiva
+        /// </summary>
         CAPTURE_ACT_WINDOW,
     }
 
@@ -47,12 +53,13 @@ namespace Picu3
             set
             {
                 _GalleryDir = value;
-                GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\" + value;
+                GalleryPath = SpecialPaths.DocFolder + value;
 
                 SaveConfig();
             }
         }
-        public static string _ImagesList = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\images.txt";
+
+        public static string _ImagesList = SpecialPaths.DocFolder + "images.txt";
 
         //private bool _OpenPicuForm;
         //public bool OpenPicuForm
@@ -74,7 +81,7 @@ namespace Picu3
             _ScreenArea = SCREEN_AREA.CAPTURE_ALL;
             _Formato = ImageFormat.Png;
             _GalleryDir = "Galleria";
-            GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\Galleria";
+            GalleryPath = SpecialPaths.DocFolder + "Galleria";
             //_OpenPicuForm = true;
 
             SaveConfig();
@@ -85,11 +92,11 @@ namespace Picu3
         /// </summary>
         public void LoadConfig()
         {
-            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\settings.xml")) { DefaultConfig(); return; }
+            if (!File.Exists(SpecialPaths.DocFolder + "settings.xml")) { DefaultConfig(); return; }
 
             try
             {
-                using(XmlReader reader = XmlReader.Create("settings.xml"))
+                using(XmlReader reader = XmlReader.Create(SpecialPaths.DocFolder + "settings.xml"))
                 {
                     bool readed = false;
                     while (reader.Read())
@@ -114,14 +121,8 @@ namespace Picu3
                                 reader.Read();
                                 readed = true;
                                 _GalleryDir = reader.Value;
-                                GalleryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\" + _GalleryDir;
+                                GalleryPath = SpecialPaths.DocFolder + _GalleryDir;
                                 break;
-                            //case "picuform":
-                            //    if (readed) { readed = false; continue; }
-                            //    reader.Read();
-                            //    readed = true;
-                            //    _OpenPicuForm = Convert.ToBoolean(reader.Value);
-                            //    break;
                         }
                     }
                 }
@@ -147,7 +148,7 @@ namespace Picu3
                 XmlWriterSettings wsetitngs = new XmlWriterSettings();
                 wsetitngs.Indent = true;
 
-                using (XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\settings.xml", wsetitngs))
+                using (XmlWriter writer = XmlWriter.Create(SpecialPaths.DocFolder + "settings.xml", wsetitngs))
                 {
                     writer.WriteStartDocument();
 

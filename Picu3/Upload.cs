@@ -71,6 +71,7 @@ namespace Picu3
         /// Indica se l'upload è stato cancellato con la forza da parte dell'utente
         /// </summary>
         private bool uploadAborted;
+        private static object lockQueue = new object();
         #endregion
 
         /// <summary>
@@ -168,7 +169,12 @@ namespace Picu3
                 fileName = Path.GetFileNameWithoutExtension(fileUrl);
 
             ListViewItem item = uploadlist.AddElementToList(fileName, "In attesa...", 0, 0);
-            queue.Enqueue(new UploadInfo(fileName, fileUrl, item));
+
+            lock (lockQueue)
+            {
+                queue.Enqueue(new UploadInfo(fileName, fileUrl, item));
+            }
+
             uploadlist.UpdateToolTipText(item, fileUrl);
 
             PrepareUploader();
@@ -200,7 +206,11 @@ namespace Picu3
             }
 
             // Estrae le informazioni
-            working_UI = queue.Dequeue();
+            lock (lockQueue)
+            {
+                working_UI = queue.Dequeue();
+            }
+        
             uploadlist.UpdateToolTipText(working_UI.listViewID, working_UI.fileUrl);
 
             Form1.notify.SetIconText("L'Upload di " + working_UI.fileName + " è iniziato. Clicca per aprire.");
@@ -220,18 +230,21 @@ namespace Picu3
         public void ClearQueue(bool inUpload = false)
         {
             // Se ci sono elementi nella queue, la pulisce
-            if (queue.Count > 0)
+            lock (lockQueue)
             {
-                // Non credo che il multi thread sia un problema
-                // RunUploader non viene eseguito su un thread diverso
-                // wc_UploadFileCompleted dovrebbe tornare sull'UI thread
-
-                foreach (UploadInfo info in queue)
+                if (queue.Count > 0)
                 {
-                    uploadlist.DeleteItem(info.listViewID);
-                }
+                    // Non credo che il multi thread sia un problema
+                    // RunUploader non viene eseguito su un thread diverso
+                    // wc_UploadFileCompleted dovrebbe tornare sull'UI thread
 
-                queue.Clear();
+                    foreach (UploadInfo info in queue)
+                    {
+                        uploadlist.DeleteItem(info.listViewID);
+                    }
+
+                    queue.Clear();
+                }
             }
 
             //Controllo se l'utente vuole cancellare anche l'upload in corso; 
@@ -247,6 +260,50 @@ namespace Picu3
             }
 
             Form1.notify.SetIconText();
+        }
+        /// <summary>
+        /// Si occupa di salvare tutta la queue in corso
+        /// </summary>
+        public void SaveQueue()
+        {
+            lock(lockQueue)
+            {
+                using (StreamWriter writer = new StreamWriter(SpecialPaths.DocFolder + "upload_queue.txt"))
+                {
+                    writer.WriteLine(DateTime.Now);
+
+                    foreach (UploadInfo info in queue)
+                    {
+                        writer.WriteLine(info.fileName + "|" + info.fileUrl + "|");
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Si occupa di reinserire nella queue gli uploads e anche di cancellare il file upload_queue.txt
+        /// </summary>
+        public void RestoreQueue()
+        {
+            using (StreamReader reader = new StreamReader(SpecialPaths.DocFolder + "upload_queue.txt"))
+            {
+                string line;
+                    
+                while((line = reader.ReadLine()) != null)
+                {
+                    // 0 => filename
+                    // 1 => fileurl
+                    string[] result = line.Split('|');
+                        
+                    if (result.Length < 2)
+                    {
+                        continue;
+                    }
+
+                    AddUpload(result[1], result[0]);
+                }
+            }
+
+            File.Delete(SpecialPaths.DocFolder + "upload_queue.txt");
         }
     }
 }

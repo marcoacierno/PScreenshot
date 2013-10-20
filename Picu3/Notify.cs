@@ -25,7 +25,6 @@ namespace Picu3
         /// </summary>
         /// <param name="icon">Icona a cui la classe deve fare riferimento</param>
         public Notify(NotifyIcon icon) { this.icon = icon; this.icon.BalloonTipClicked += icon_BalloonTipClicked; }
-
         /// <summary>
         /// Viene richiamato quando clicca sul ballon; viene gestito dall'utente che passa l'eventhandler ad ogni chiamata di SendMessage
         /// </summary>
@@ -57,7 +56,6 @@ namespace Picu3
 
             icon.ShowBalloonTip(timeout);
         }
-
         /// <summary>
         /// Questo metodo si occupa di modificare il testo dell'icona
         /// </summary>

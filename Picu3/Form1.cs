@@ -13,7 +13,6 @@ using System.Windows.Forms;
 
 //Nella vita non c'è niente di cosi terrificante e allo stesso tempo esaltate che prendere l'iniziativa.. quando si rischia tutto e ci si butta
 
-
 namespace Picu3
 {
     public partial class Form1 : Form
@@ -98,13 +97,31 @@ namespace Picu3
 
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "Picu\\version.txt"))
             {
-                using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\version.txt"))
+                using (StreamWriter sw = new StreamWriter(SpecialPaths.DocFolder + "version.txt"))
                 {
                     sw.WriteLine(version);
                 }
             }
 
             notify = new Notify(this.notifyIcon1);
+
+            /// si avvia il programma
+            /// controllo se esiste il file di restore
+            if (File.Exists(SpecialPaths.UploadQueueFile))
+            {
+                string date = File.ReadAllLines(SpecialPaths.UploadQueueFile)[0];
+
+                DialogResult r = MessageBox.Show("Picu ha trovato il file di restore upload.\nData creazione: " + date + ".\nVuoi reinserire gli uploads nella lista?", "Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+                if (r == System.Windows.Forms.DialogResult.Yes)
+                {
+                    upload.RestoreQueue();
+                }
+                else
+                {
+                    File.Delete(SpecialPaths.UploadQueueFile);
+                }
+            }
         }
 
         /// <summary>
@@ -178,11 +195,19 @@ namespace Picu3
         {
             if (upload.inWorking)
             {
-                DialogResult result = MessageBox.Show("Attualmente il programma sta ancora termindo l'upload, vuoi veramente uscire?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Al momento Picu sta caricando alcune foto. Vuoi salvare la lista e riprenderla successivamente o chiudere il programma?", "Attenzione", MessageBoxButtons.YesNoCancel);
 
-                if (result == System.Windows.Forms.DialogResult.No)
+                switch (result)
                 {
-                    e.Cancel = true;
+                    case System.Windows.Forms.DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    case System.Windows.Forms.DialogResult.No:
+                        // esce semplicemente
+                        break;
+                    case System.Windows.Forms.DialogResult.Yes:
+                        upload.SaveQueue();
+                        break;
                 }
             }
 
