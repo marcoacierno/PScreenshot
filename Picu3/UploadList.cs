@@ -177,7 +177,8 @@ namespace Picu3
                 }
                 catch(Exception ex)
                 {
-                    Logs.Log("Error nel caricare e analizzare il file images.txt; Exception: " + ex.Message + " ; Stack trace: " + ex.StackTrace);
+                    Logs.Log(ex);
+                    //Logs.Log("Error nel caricare e analizzare il file images.txt; Exception: " + ex.Message + " ; Stack trace: " + ex.StackTrace);
                     MessageBox.Show("Si è verificato un errore nel caricare la lista delle immagini.");
                 }
             }

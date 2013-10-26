@@ -339,8 +339,10 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>ICSharpCode.SharpZipLib.dll</td><td>{AE125DA3-B583-4C9A-9EDD-BC2E6C963A5C}</td><td>INSTALLDIR</td><td>2</td><td/><td>icsharpcode.sharpziplib.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{CACB5227-E37F-488E-9D9C-294AC4FD94D8}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Picu3.exe</td><td>{5404A713-8C8F-4E27-AE27-7E10FE985A51}</td><td>INSTALLDIR</td><td>2</td><td/><td>picu3.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Picu3.exe</td><td>{9978C495-DDF2-41A0-AE54-E60FC479A4A7}</td><td>INSTALLDIR</td><td>2</td><td/><td>picu3.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>updater.exe</td><td>{684946C7-2266-405F-BB92-620362F76DC1}</td><td>INSTALLDIR</td><td>2</td><td/><td>updater.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -938,10 +940,10 @@
 		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>DestinationFolder</td><td>1</td><td>0</td></row>
-		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
+		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>NOT Installed</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>DoAction</td><td>ISPrint</td><td>1</td><td>0</td></row>
-		<row><td>LicenseAgreement</td><td>Next</td><td>NewDialog</td><td>CustomerInformation</td><td>AgreeToLicense = "Yes"</td><td>0</td></row>
+		<row><td>LicenseAgreement</td><td>Next</td><td>NewDialog</td><td>DestinationFolder</td><td>AgreeToLicense = "Yes"</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>NewDialog</td><td>MaintenanceWelcome</td><td>1</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Next</td><td>NewDialog</td><td>CustomSetup</td><td>_IsMaintenance = "Change"</td><td>12</td></row>
@@ -1168,7 +1170,7 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
-		<row><td>nomeso_1_nome_societ_</td><td>ProgramMenuFolder</td><td>NOMESO~1|Nome società</td><td/><td>1</td><td/></row>
+		<row><td>nomeso_1_nome_societ_</td><td>ProgramMenuFolder</td><td>Picu</td><td/><td>1</td><td/></row>
 		<row><td>picu</td><td>nomeso_1_nome_societ_</td><td>Picu</td><td/><td>1</td><td/></row>
 	</table>
 
@@ -1861,8 +1863,10 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>ICSharpCode.SharpZipLib.dll</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>Picu3.exe</td></row>
+		<row><td>AlwaysInstall</td><td>updater.exe</td></row>
 	</table>
 
 	<table name="File">
@@ -1877,9 +1881,11 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>icon.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>icon.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\Visual Studio 2013\Projects\Picu3\Picu3\bin\Debug\icon.ico</td><td>1</td><td/></row>
-		<row><td>picu3.exe</td><td>Picu3.exe</td><td>Picu3.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\Visual Studio 2013\Projects\Picu3\Picu3\bin\Debug\Picu3.exe</td><td>1</td><td/></row>
-		<row><td>settings.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>settings.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\Visual Studio 2013\Projects\Picu3\Picu3\bin\Debug\settings.ico</td><td>1</td><td/></row>
+		<row><td>icon.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>icon.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\GitHub\PScreenshot\Picu3\bin\Release\icon.ico</td><td>1</td><td/></row>
+		<row><td>icsharpcode.sharpziplib.dll</td><td>ICSharpCode.SharpZipLib.dll</td><td>ICSHAR~1.DLL|ICSharpCode.SharpZipLib.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\GitHub\PScreenshot\updater\bin\Release\ICSharpCode.SharpZipLib.dll</td><td>1</td><td/></row>
+		<row><td>picu3.exe</td><td>Picu3.exe</td><td>Picu3.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\GitHub\PScreenshot\Picu3\bin\Release\Picu3.exe</td><td>1</td><td/></row>
+		<row><td>settings.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>settings.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\GitHub\PScreenshot\Picu3\bin\Release\settings.ico</td><td>1</td><td/></row>
+		<row><td>updater.exe</td><td>updater.exe</td><td>updater.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Marco\Documents\GitHub\PScreenshot\updater\bin\Release\updater.exe</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2023,8 +2029,10 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>ICSharpCode.SharpZipLib.dll</td><td/><td/><td>_40AD545A_B554_4CFB_B766_29A13860A437_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_C0C38AC1_92B7_4005_888C_74F049F295DF_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Picu3.exe</td><td/><td/><td>_4726EBF9_4514_459D_A41C_3A99937A5378_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Picu3.exe</td><td/><td/><td>_8B82CDED_1123_461A_A40E_35E9D39C012E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>updater.exe</td><td/><td/><td>_D9714F9E_593F_4A94_849F_6E3FE74659F9_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2642,9 +2650,15 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1040</td><td>Nome società</td><td>0</td><td/><td>-2069815726</td></row>
+		<row><td>COMPANY_NAME</td><td>1040</td><td>Revonline</td><td>0</td><td/><td>-853452941</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1040</td><td>Installa sempre</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1040</td><td>Le impostazioni dei colori del sistema non sono adeguate per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35</td><td>1033</td><td>Microsoft .NET Framework 3.5 needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853441516</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35</td><td>1040</td><td>Microsoft .NET Framework 3.5 needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853433324</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40FULL</td><td>1033</td><td>Microsoft .NET Framework 4.0 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853445612</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40FULL</td><td>1040</td><td>Microsoft .NET Framework 4.0 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853445612</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853445612</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1040</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-853445612</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1040</td><td>Il sistema operativo non è adeguato per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1040</td><td>Il processore non è adeguato per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1040</td><td>La quantità di RAM non è adeguata per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
@@ -3456,6 +3470,10 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1040</td><td>Questo programma di installazione è stato realizzato con una versione di prova di InstallShield e può essere avviato solo da setup.exe.</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td/><td>0</td><td/><td>-2069789038</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1040</td><td>LAUNCH~1.EXE|Launch Picu3.exe</td><td>0</td><td/><td>-2069789038</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td/><td>0</td><td/><td>-853437261</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1040</td><td>LAUNCH~1.EXE|Launch Picu3.exe</td><td>0</td><td/><td>-853437261</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td/><td>0</td><td/><td>-853463853</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1040</td><td>LAUNCH~1.EXE|Launch updater.exe</td><td>0</td><td/><td>-853463853</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1040</td><td>Dall'elenco dei server riportato di seguito, selezionare il server database ricercato.</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1040</td><td>Dall'elenco dei nomi di catalogo, selezionare il catalogo database da impostare come destinazione.</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1040</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-2069815726</td></row>
@@ -3745,10 +3763,12 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1040</td><td>La quantità di RAM non è adeguata per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1040</td><td>La risoluzione dello schermo non è adeguata per l'esecuzione di [ProductName].</td><td>0</td><td/><td>-2069815726</td></row>
 		<row><td>ID_STRING1</td><td>1040</td><td/><td>0</td><td/><td>-2069815726</td></row>
-		<row><td>ID_STRING2</td><td>1040</td><td>http://picu.site11.com/</td><td>0</td><td/><td>-2069815726</td></row>
-		<row><td>ID_STRING3</td><td>1040</td><td>Picu</td><td>0</td><td/><td>-2069815726</td></row>
+		<row><td>ID_STRING2</td><td>1040</td><td>http://revonline.comuf.com/</td><td>0</td><td/><td>-853438444</td></row>
+		<row><td>ID_STRING3</td><td>1040</td><td>Picu</td><td>0</td><td/><td>-853433069</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch Picu3.exe</td><td>0</td><td/><td>-2069789038</td></row>
 		<row><td>ID_STRING4</td><td>1040</td><td>LAUNCH~1.EXE|Launch Picu3.exe</td><td>0</td><td/><td>-2069789038</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>=-NewEnvironment1</td><td>0</td><td/><td>-853461996</td></row>
+		<row><td>ID_STRING5</td><td>1040</td><td>=-NewEnvironment1</td><td>0</td><td/><td>-853461996</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1040</td><td>Questa caratteristica non verrà installata.</td><td>0</td><td/><td>-2069815726</td></row>
 	</table>
 
@@ -3859,6 +3879,7 @@
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
 		<row><td>Picu3.exe1_5DB2BA1355B84344901DEFE75FECA0CC.exe</td><td/><td>C:\Users\Marco\Documents\Visual Studio 2013\Projects\Picu3\Picu3\bin\Debug\Picu3.exe</td><td>0</td></row>
 		<row><td>Picu3.exe_0067167548E648E6B7DE5892E76AE5A5.exe</td><td/><td>C:\Users\Marco\Documents\Visual Studio 2013\Projects\Picu3\Picu3\bin\Release\Picu3.exe</td><td>0</td></row>
+		<row><td>Picu3.exe_AF26AF321AD44699AB23AA7372444014.exe</td><td/><td>C:\Users\Marco\Documents\GitHub\PScreenshot\Picu3\bin\Release\Picu3.exe</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3991,7 +4012,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{F4FBCA2B-22FE-458B-8B6F-B7B2D1966BB9}</td></row>
 		<row><td>ISUSSignature</td><td>{44F76AA4-EEFC-4C58-9191-7BCA27AB02D0}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewISToday,viewShortcuts</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewISToday,viewShortcuts,viewAppV,viewRealSetupDesign,viewSetupDesign,viewRegistry,viewIniFiles,viewEnvironmentVariables</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4366,7 +4387,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{B47B151F-88AC-4928-9522-B0A8637F12C4}</td><td/></row>
 		<row><td>ProductName</td><td>Picu</td><td/></row>
-		<row><td>ProductVersion</td><td>3.00.0000</td><td/></row>
+		<row><td>ProductVersion</td><td>3.05.1000</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4442,8 +4463,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>Picu3.exe</td><td/><td>nomeso_1_nome_societ_</td><td>2</td></row>
-		<row><td>FileKey2</td><td>Picu3.exe</td><td/><td>picu</td><td>2</td></row>
 		<row><td>Picu3.exe</td><td>Picu3.exe</td><td/><td>picu</td><td>2</td></row>
 	</table>
 
@@ -4530,8 +4549,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>Picu3.exe</td><td>picu</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Picu3.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Picu3.exe_0067167548E648E6B7DE5892E76AE5A5.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>Picu3.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Picu3.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Picu3.exe1_5DB2BA1355B84344901DEFE75FECA0CC.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>Picu3.exe</td><td>picu</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>Picu3.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Picu3.exe_AF26AF321AD44699AB23AA7372444014.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

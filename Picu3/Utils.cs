@@ -8,6 +8,9 @@ namespace Picu3
 {
     class Utils
     {
+        /// <summary>
+        /// Passando come key la stringa ti ritorna sotto forma di ImageFormat il formato
+        /// </summary>
         private static Dictionary<string, ImageFormat> extensions = new Dictionary<string, ImageFormat>()
         {
             {"png", ImageFormat.Png},
@@ -15,7 +18,9 @@ namespace Picu3
             {"bmp", ImageFormat.Bmp},
             {"gif", ImageFormat.Gif}
         };
-
+        /// <summary>
+        /// Passando come key l'imageformat ti ritorna il formato sotto forma di stringa
+        /// </summary>
         private static Dictionary<ImageFormat, string> ifExtensions = new Dictionary<ImageFormat, string>()
         {
             {ImageFormat.Png, "png"},
@@ -56,7 +61,9 @@ namespace Picu3
             File.Delete(Settings._ImagesList);
         }
     }
-
+    /// <summary>
+    /// Classe che si occupa di eseguire i log sul file
+    /// </summary>
     class Logs
     {
         public static void Log(string text)
@@ -64,6 +71,30 @@ namespace Picu3
             using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\logs.txt", true))
             {
                 sw.WriteLine("[" + DateTime.Now.ToString() + "]: " + text);
+            }
+        }
+
+        public static void Log(Exception e)
+        {
+            using (StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Picu\\logs.txt", true))
+            {
+                sw.WriteLine("[" + DateTime.Now.ToString() + "] == Exception " + e.ToString() + " in " + e.Source + " ==");
+                sw.WriteLine("Message: " + e.Message);
+                sw.WriteLine("Stack trace: \n" + e.StackTrace);
+                
+                Exception ex = e.InnerException;
+
+                while(ex != null)
+                {
+                    sw.WriteLine("== Inner exception " + ex.ToString() + " in " + ex.Source + " ==");
+                    sw.WriteLine("Message: " + ex.Message);
+                    sw.WriteLine("Stack trace: \n" + ex.StackTrace);
+                    sw.WriteLine("== Fine inner exception ==");
+
+                    ex = ex.InnerException;
+                }
+
+                sw.WriteLine("== Fine exception ==");
             }
         }
     }

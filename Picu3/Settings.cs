@@ -133,7 +133,8 @@ namespace Picu3
             { 
                 // Loading fallito
                 // Carica default config
-                Logs.Log("Caricamento del config fallito. Exception: " + e.Message + " ; Stack trace:" + e.StackTrace);
+                //Logs.Log("Caricamento del config fallito. Exception: " + e.Message + " ; Stack trace:" + e.StackTrace);
+                Logs.Log(e);
                 DefaultConfig();
             }
         }
@@ -171,7 +172,8 @@ namespace Picu3
             }
             catch(Exception e)
             {
-                Logs.Log("Salvataggio del config fallito. Exception: " + e.Message + " -- Stack trace: " + e.StackTrace );
+                Logs.Log(e);
+                //Logs.Log("Salvataggio del config fallito. Exception: " + e.Message + " -- Stack trace: " + e.StackTrace );
             }
         } 
         #endregion

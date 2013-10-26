@@ -143,8 +143,9 @@ namespace Picu3
             }
             catch(Exception ee)
             {
-                Logs.Log("Exception dall'uploader; Expcetion: " + ee.Message + " ; Stack trace: " + ee.StackTrace);
-                Logs.Log("^^ Innerexception: " + ee.InnerException.Message + " ; stack trace: " + ee.InnerException.StackTrace);
+                Logs.Log(ee);
+                //Logs.Log("Exception dall'uploader; Expcetion: " + ee.Message + " ; Stack trace: " + ee.StackTrace);
+                //Logs.Log("^^ Innerexception: " + ee.InnerException.Message + " ; stack trace: " + ee.InnerException.StackTrace);
 
                 uploadlist.UpdateGroup(working_UI.listViewID, 2);
                 uploadlist.UpdateResultStatus(working_UI.listViewID, "Impossibile risolvere l'host (?)");
