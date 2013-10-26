@@ -67,10 +67,6 @@ namespace Picu3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Utils.ClearList(true);
-            //pesogalleria.Text = "0 MB";
-            //Form1.notify.SendMessage("Impostazioni", "Galleria pulita", null, ToolTipIcon.Info);
-
             gestionegalleria.Show(Cursor.Position);
         }
 
@@ -89,6 +85,7 @@ namespace Picu3
 
         private void apriToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(Form1.settings.GalleryPath)) Directory.CreateDirectory(Form1.settings.GalleryPath);
             Process.Start(Form1.settings.GalleryPath);
         }
     }
